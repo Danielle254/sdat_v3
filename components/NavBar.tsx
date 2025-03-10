@@ -13,8 +13,19 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Image src={logo} height={40} alt="" width={40} />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Image
+            src={logo}
+            height={30}
+            alt=""
+            width={30}
+            style={{ paddingRight: "5px" }}
+          />
+          <Typography
+            variant="h1"
+            component="div"
+            sx={{ flexGrow: 1 }}
+            fontSize="h5.fontSize"
+          >
             Service Dogs Around Town
           </Typography>
           <IconButton
