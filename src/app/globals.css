@@ -2,6 +2,11 @@ body {
   margin: 0;
 }
 
-.map-container {
+.maps-page {
   height: 100vh;
+  overflow: hidden;
+}
+
+.map-container {
+  height: 100%;
 }
