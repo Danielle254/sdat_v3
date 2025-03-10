@@ -25,6 +25,7 @@ export default function Home() {
           zoomControlOptions={{
             position: 6,
           }}
+          fullscreenControlOptions={{ position: 6 }}
         ></Map>
       </div>
     </APIProvider>
