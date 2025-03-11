@@ -18,7 +18,7 @@ export default function ButtonAppBar() {
             height={30}
             alt=""
             width={30}
-            style={{ paddingRight: "5px" }}
+            style={{ marginRight: "5px" }}
           />
           <Typography
             variant="h1"
