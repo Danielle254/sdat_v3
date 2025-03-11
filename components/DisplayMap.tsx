@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import PlacesAutocomplete from "./PlacesAutocomplete";
 
 import React from "react";
 
@@ -27,7 +28,9 @@ export default function DisplayMap() {
             position: 6,
           }}
           fullscreenControlOptions={{ position: 6 }}
-        ></Map>
+        >
+          <PlacesAutocomplete />
+        </Map>
       </div>
     </APIProvider>
   );
