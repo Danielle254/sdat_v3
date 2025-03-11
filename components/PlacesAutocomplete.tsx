@@ -32,25 +32,10 @@ export default function PlacesAutocomplete(/* { onPlaceSelect } */) {
   }, [onPlaceSelect, placeAutocomplete]); */
 
   return (
-    /*     <Box
-      component="form"
-      sx={{
-        width: "35ch",
-        zIndex: "10",
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        borderRadius: "25px",
-        bgcolor: "primary.info",
-      }}
-      noValidate
-      autoComplete="off"
-    > */
     <TextField
       placeholder="Search for a Business"
       variant="standard"
       sx={{
-        width: "40ch",
         zIndex: "10",
         position: "absolute",
         top: "10px",
@@ -71,17 +56,5 @@ export default function PlacesAutocomplete(/* { onPlaceSelect } */) {
         },
       }}
     />
-    /*     </Box> */
   );
 }
-
-//    <div className="places-autocomplete">
-//    <label htmlFor={"search"}>
-//    Type Business Name to Search, then Select
-//   </label>
-// <input
-//      id={"search"}
-//     /* ref={inputRef} */
-//      placeholder="Ex: Lolo Creek Steakhouse"
-//    />
-//   </div>
