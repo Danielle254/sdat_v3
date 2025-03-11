@@ -44,6 +44,7 @@ export default function PlacesAutocomplete(/* { onPlaceSelect } */) {
         bgcolor: "primary.light",
         py: 1,
         px: 2,
+        width: { xs: "90%", sm: "40ch" },
       }}
       slotProps={{
         input: {
