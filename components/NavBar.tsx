@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
 import logo from "../public/logo.png";
 
-export default function ButtonAppBar() {
+export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
