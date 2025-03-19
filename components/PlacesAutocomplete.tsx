@@ -30,7 +30,7 @@ export default function PlacesAutocomplete({
 
     placeAutocomplete.addListener("place_changed", () => {
       onPlaceSelect(placeAutocomplete.getPlace());
-      inputRef.current.value = "";
+      /* inputRef.current.value = ""; */
     });
   }, [onPlaceSelect, placeAutocomplete]);
 
