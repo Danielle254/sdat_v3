@@ -16,7 +16,8 @@ export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>

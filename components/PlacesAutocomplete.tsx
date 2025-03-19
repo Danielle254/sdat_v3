@@ -2,7 +2,9 @@ import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import React, { useEffect, useRef, useState } from "react";
 
 interface PlaceAutocompleteProps {
-  onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
+  onPlaceSelect: (
+    place: google.maps.places.PlaceResult | null
+  ) => void | React.Dispatch<React.SetStateAction<null>>;
 }
 
 export default function PlacesAutocomplete({
