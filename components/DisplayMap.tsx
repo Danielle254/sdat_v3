@@ -1,14 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import {
+  AdvancedMarker,
+  APIProvider,
+  Map,
+  Pin,
+  useAdvancedMarkerRef,
+} from "@vis.gl/react-google-maps";
 import PlacesAutocomplete from "./PlacesAutocomplete";
-
+import MapHandler from "./MapHandler";
 import React from "react";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
+  const [markerRef, marker] = useAdvancedMarkerRef();
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>
       <div className="map-container">
@@ -29,8 +38,30 @@ export default function DisplayMap() {
           }}
           fullscreenControlOptions={{ position: 6 }}
         >
-          <PlacesAutocomplete />
+          <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
+          <AdvancedMarker ref={markerRef} position={null} clickable={true}>
+            <Pin
+              background={"#53cbe2"}
+              glyphColor={"#0E1B41"}
+              borderColor={"#0E1B41"}
+              scale={1.2}
+            />
+          </AdvancedMarker>
+          <AdvancedMarker
+            position={{
+              lat: 46.8360851,
+              lng: -114.0154287,
+            }}
+          >
+            <Pin
+              background={"#0E1B41"}
+              borderColor={"#0E1B41"}
+              glyphColor={"#53cbe2"}
+              scale={1.2}
+            />
+          </AdvancedMarker>
         </Map>
+        <MapHandler place={selectedPlace} marker={marker} />
       </div>
     </APIProvider>
   );
