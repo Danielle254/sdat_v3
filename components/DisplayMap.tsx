@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   AdvancedMarker,
   APIProvider,
   Map,
   Pin,
   useAdvancedMarkerRef,
+  InfoWindow,
 } from "@vis.gl/react-google-maps";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import React from "react";
+import { Box, Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
@@ -18,6 +21,12 @@ export default function DisplayMap() {
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [selectedPlace, setSelectedPlace] =
     useState<google.maps.places.PlaceResult | null>(null);
+  const [infoWindowShown, setInfoWindowShown] = useState(true);
+  const handleClose = useCallback(() => setInfoWindowShown(false), []);
+
+  function handleMarkerClick() {
+    setInfoWindowShown((isShown) => !isShown);
+  }
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>
@@ -40,7 +49,12 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
-          <AdvancedMarker ref={markerRef} position={null} clickable={true}>
+          <AdvancedMarker
+            ref={markerRef}
+            position={null}
+            clickable={true}
+            onClick={() => handleMarkerClick()}
+          >
             <Pin
               background={"#53cbe2"}
               glyphColor={"#0E1B41"}
@@ -48,6 +62,32 @@ export default function DisplayMap() {
               scale={1.2}
             />
           </AdvancedMarker>
+          {infoWindowShown && (
+            <InfoWindow
+              anchor={marker}
+              onClose={handleClose}
+              shouldFocus={true}
+            >
+              <Box>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: "bold" }}
+                  gutterBottom={true}
+                >
+                  {selectedPlace?.name}
+                </Typography>
+                <Typography variant="body2" gutterBottom={true}>
+                  {selectedPlace?.formatted_address}
+                </Typography>
+                <Button
+                  variant="contained"
+                  /* onClick={handleFormVisible} */
+                >
+                  Review
+                </Button>
+              </Box>
+            </InfoWindow>
+          )}
           <AdvancedMarker
             position={{
               lat: 46.8360851,
