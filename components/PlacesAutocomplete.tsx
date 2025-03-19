@@ -1,17 +1,20 @@
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import React, { useEffect, useRef, useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
 
-export default function PlacesAutocomplete(/* { onPlaceSelect } */) {
-  const [placeAutocomplete, setPlaceAutocomplete] = useState(null);
-  /*   const inputRef = useRef(); */
+interface PlaceAutocompleteProps {
+  onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
+}
+
+export default function PlacesAutocomplete({
+  onPlaceSelect,
+}: PlaceAutocompleteProps) {
+  const [placeAutocomplete, setPlaceAutocomplete] =
+    useState<google.maps.places.Autocomplete | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const places = useMapsLibrary("places");
 
   useEffect(() => {
-    if (!places /* || !inputRef.current */) return;
+    if (!places || !inputRef.current) return;
 
     const options = {
       fields: ["geometry", "name", "formatted_address"],
@@ -19,43 +22,23 @@ export default function PlacesAutocomplete(/* { onPlaceSelect } */) {
       types: ["establishment"],
     };
 
-    /* setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options)); */
+    setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
   }, [places]);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     if (!placeAutocomplete) return;
 
     placeAutocomplete.addListener("place_changed", () => {
       onPlaceSelect(placeAutocomplete.getPlace());
       inputRef.current.value = "";
     });
-  }, [onPlaceSelect, placeAutocomplete]); */
+  }, [onPlaceSelect, placeAutocomplete]);
 
   return (
-    <TextField
+    <input
+      ref={inputRef}
+      className="autocomplete"
       placeholder="Search for a Business"
-      variant="standard"
-      sx={{
-        zIndex: "10",
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        borderRadius: "25px",
-        bgcolor: "primary.light",
-        py: 1,
-        px: 2,
-        width: { xs: "90%", sm: "40ch" },
-      }}
-      slotProps={{
-        input: {
-          endAdornment: (
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          disableUnderline: true,
-        },
-      }}
     />
   );
 }

@@ -13,3 +13,20 @@ body {
 .map-container {
   height: 100%;
 }
+
+.autocomplete {
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 25px;
+  background-color: #fff;
+  padding: 6px 2px 6px 4px;
+  width: 40ch;
+}
+
+@media screen and (max-width: 350px) {
+  .autocomplete {
+    width: 90%;
+  }
+}
