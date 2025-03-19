@@ -21,8 +21,9 @@ body {
   right: 10px;
   border-radius: 25px;
   background-color: #fff;
-  padding: 6px 2px 6px 4px;
+  padding: 8px 4px 8px 6px;
   width: 40ch;
+  border: 1px solid gray;
 }
 
 @media screen and (max-width: 350px) {
