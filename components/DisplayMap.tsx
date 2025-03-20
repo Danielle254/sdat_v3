@@ -14,6 +14,7 @@ import MapHandler from "./MapHandler";
 import React from "react";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import ModalBox from "./ModalBox";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
@@ -23,7 +24,11 @@ export default function DisplayMap() {
     useState<google.maps.places.PlaceResult | null>(null);
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
+  const [modalOpen, setModalOpen] = useState(false);
 
+  function handleCloseModal() {
+    setModalOpen(false);
+  }
   function handleMarkerClick() {
     setInfoWindowShown((isShown) => !isShown);
   }
@@ -79,10 +84,7 @@ export default function DisplayMap() {
                 <Typography variant="body2" gutterBottom={true}>
                   {selectedPlace?.formatted_address}
                 </Typography>
-                <Button
-                  variant="contained"
-                  /* onClick={handleFormVisible} */
-                >
+                <Button variant="contained" onClick={() => setModalOpen(true)}>
                   Review
                 </Button>
               </Box>
@@ -104,6 +106,13 @@ export default function DisplayMap() {
         </Map>
         <MapHandler place={selectedPlace} marker={marker} />
       </div>
+      {selectedPlace && (
+        <ModalBox
+          modalOpen={modalOpen}
+          handleCloseModal={handleCloseModal}
+          selectedPlace={selectedPlace}
+        />
+      )}
     </APIProvider>
   );
 }
