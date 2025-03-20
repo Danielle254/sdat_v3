@@ -44,7 +44,7 @@ export default function ModalBox({
         >
           <Close />
         </IconButton>
-        <NewPlaceForm place={selectedPlace} />
+        {selectedPlace && <NewPlaceForm place={selectedPlace} />}
       </Box>
     </Modal>
   );

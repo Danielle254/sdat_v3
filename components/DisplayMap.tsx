@@ -26,13 +26,6 @@ export default function DisplayMap() {
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
 
-  function handleCloseModal() {
-    setModalOpen(false);
-  }
-  function handleMarkerClick() {
-    setInfoWindowShown((isShown) => !isShown);
-  }
-
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>
       <div className="map-container">
@@ -58,7 +51,7 @@ export default function DisplayMap() {
             ref={markerRef}
             position={null}
             clickable={true}
-            onClick={() => handleMarkerClick()}
+            onClick={() => setInfoWindowShown((isShown) => !isShown)}
           >
             <Pin
               background={"#53cbe2"}
@@ -106,13 +99,12 @@ export default function DisplayMap() {
         </Map>
         <MapHandler place={selectedPlace} marker={marker} />
       </div>
-      {selectedPlace && (
-        <ModalBox
-          modalOpen={modalOpen}
-          handleCloseModal={handleCloseModal}
-          selectedPlace={selectedPlace}
-        />
-      )}
+
+      <ModalBox
+        modalOpen={modalOpen}
+        handleCloseModal={() => setModalOpen(false)}
+        selectedPlace={selectedPlace}
+      />
     </APIProvider>
   );
 }

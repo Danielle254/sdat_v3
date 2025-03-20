@@ -13,7 +13,7 @@ import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 type NewPlaceFormProps = {
-  place: google.maps.places.PlaceResult | null;
+  place: google.maps.places.PlaceResult;
 };
 
 export default function NewPlaceForm({ place }: NewPlaceFormProps) {
@@ -25,10 +25,10 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
         fontSize="h5.fontSize"
         gutterBottom={true}
       >
-        {place?.name}
+        {place.name}
       </Typography>
       <Typography variant="body1" gutterBottom={true}>
-        {place?.formatted_address}
+        {place.formatted_address}
       </Typography>
       <Divider sx={{ my: 2 }} />
       <form>
