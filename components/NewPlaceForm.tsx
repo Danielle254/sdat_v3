@@ -152,7 +152,7 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
             required={true}
           />
         </FormGroup>
-        <Button variant="contained" type="submit" sx={{ mt: 4 }}>
+        <Button variant="contained" type="submit" sx={{ mt: 2 }}>
           Submit
         </Button>
       </form>
