@@ -17,12 +17,7 @@ export default function ModalBox({
   selectedPlace,
 }: ModalBoxProps) {
   return (
-    <Modal
-      open={modalOpen}
-      onClose={handleCloseModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <Modal open={modalOpen} onClose={handleCloseModal}>
       <Box
         sx={{
           position: "absolute",
