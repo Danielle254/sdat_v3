@@ -8,11 +8,13 @@ import { Close } from "@mui/icons-material";
 type ModalBoxProps = {
   modalOpen: boolean;
   handleCloseModal: () => void;
+  selectedPlace: google.maps.places.PlaceResult | null;
 };
 
 export default function ModalBox({
   modalOpen,
   handleCloseModal,
+  selectedPlace,
 }: ModalBoxProps) {
   return (
     <Modal
@@ -27,7 +29,7 @@ export default function ModalBox({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "50%",
+          width: { xs: "100%", md: "50%" },
           bgcolor: "background.paper",
           border: "2px solid #000",
           boxShadow: 24,
@@ -47,7 +49,7 @@ export default function ModalBox({
         >
           <Close />
         </IconButton>
-        <NewPlaceForm />
+        <NewPlaceForm place={selectedPlace} />
       </Box>
     </Modal>
   );
