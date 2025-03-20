@@ -106,7 +106,13 @@ export default function DisplayMap() {
         </Map>
         <MapHandler place={selectedPlace} marker={marker} />
       </div>
-      <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal} />
+      {selectedPlace && (
+        <ModalBox
+          modalOpen={modalOpen}
+          handleCloseModal={handleCloseModal}
+          selectedPlace={selectedPlace}
+        />
+      )}
     </APIProvider>
   );
 }
