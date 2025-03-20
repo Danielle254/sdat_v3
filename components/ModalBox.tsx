@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "@mui/material/Modal";
 import NewPlaceForm from "./NewPlaceForm";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import { Close } from "@mui/icons-material";
 
 type ModalBoxProps = {
   modalOpen: boolean;
@@ -34,6 +36,17 @@ export default function ModalBox({
           overflowY: "scroll",
         }}
       >
+        <IconButton
+          size="large"
+          color="inherit"
+          aria-label="close modal"
+          onClick={handleCloseModal}
+          sx={{
+            float: "right",
+          }}
+        >
+          <Close />
+        </IconButton>
         <NewPlaceForm />
       </Box>
     </Modal>
