@@ -68,14 +68,8 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           Did you experience any of these difficulties during your visit?
         </Typography>
         <FormGroup sx={{ my: 2 }}>
-          <FormControlLabel
-            control={<Switch color="error" />}
-            label="Access Issues"
-          />
-          <FormControlLabel
-            control={<Switch color="error" />}
-            label="Safety Issues"
-          />
+          <FormControlLabel control={<Switch />} label="Access Issues" />
+          <FormControlLabel control={<Switch />} label="Safety Issues" />
           <FormControlLabel
             control={<Switch />}
             label="Rude or Untrained Staff"
@@ -139,7 +133,7 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           <Typography component="legend">Overall Rating</Typography>
           <Rating name="rating" precision={1} size="large" />
           <FormControlLabel
-            control={<Switch color="success" />}
+            control={<Switch />}
             label="Recommend to Other Service Dog Handlers"
             sx={{ my: 2 }}
           />
