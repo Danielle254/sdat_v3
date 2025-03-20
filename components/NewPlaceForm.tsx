@@ -17,6 +17,7 @@ type NewPlaceFormProps = {
 };
 
 export default function NewPlaceForm({ place }: NewPlaceFormProps) {
+  const today = new Date().toJSON().slice(0, 10);
   return (
     <>
       <Typography
@@ -32,6 +33,34 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
       </Typography>
       <Divider sx={{ my: 2 }} />
       <form>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            marginBottom: "16px",
+          }}
+        >
+          <label htmlFor="visit-date" style={{ fontSize: "16px" }}>
+            Date Visited
+          </label>
+          <input
+            required
+            id="visit-date"
+            type="date"
+            name="dateVisited"
+            max={today}
+            min="2020-01-01"
+            style={{
+              maxWidth: "200px",
+              padding: "4px 0",
+              fontSize: "16px",
+              cursor: "pointer",
+            }}
+          />
+        </div>
+        <Divider sx={{ my: 2 }} />
+
         <Typography variant="body1" sx={{ fontWeight: "bold" }}>
           Issues
         </Typography>
