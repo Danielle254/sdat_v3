@@ -10,8 +10,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
-export default function NewPlaceForm() {
+type NewPlaceFormProps = {
+  place: google.maps.places.PlaceResult | null;
+};
+
+export default function NewPlaceForm({ place }: NewPlaceFormProps) {
   return (
     <>
       <Typography
@@ -20,10 +25,10 @@ export default function NewPlaceForm() {
         fontSize="h5.fontSize"
         gutterBottom={true}
       >
-        Biz Name
+        {place?.name}
       </Typography>
       <Typography variant="body1" gutterBottom={true}>
-        Address
+        {place?.formatted_address}
       </Typography>
       <Divider sx={{ my: 2 }} />
       <form>
@@ -33,7 +38,7 @@ export default function NewPlaceForm() {
         <Typography variant="body2" gutterBottom={true}>
           Did you experience any of these difficulties during your visit?
         </Typography>
-        <FormGroup>
+        <FormGroup sx={{ my: 2 }}>
           <FormControlLabel
             control={<Switch color="error" />}
             label="Access Issues"
@@ -56,8 +61,19 @@ export default function NewPlaceForm() {
           />
         </FormGroup>
         <Divider sx={{ my: 2 }} />
-        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-          For You
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          For You <VisibilityIcon fontSize="small" />
+        </Typography>
+        <Typography variant="body2" gutterBottom={true}>
+          These details are visible only to you.
         </Typography>
         <FormGroup>
           <FormControlLabel
@@ -69,12 +85,14 @@ export default function NewPlaceForm() {
               />
             }
             label="Favorite"
+            sx={{ mt: 2 }}
           />
           <TextField
             multiline
             minRows={4}
             id="outlined-textarea"
             label="Private Note"
+            sx={{ my: 2 }}
           />
         </FormGroup>
         <Divider sx={{ my: 2 }} />
@@ -85,12 +103,16 @@ export default function NewPlaceForm() {
         >
           For Others
         </Typography>
-        <FormGroup>
+        <Typography variant="body2" gutterBottom={true}>
+          These details are visible to other users.
+        </Typography>
+        <FormGroup sx={{ my: 2 }}>
           <Typography component="legend">Overall Rating</Typography>
           <Rating name="rating" precision={1} size="large" />
           <FormControlLabel
             control={<Switch color="success" />}
             label="Recommend to Other Service Dog Handlers"
+            sx={{ my: 2 }}
           />
           <Typography variant="body1">Review</Typography>
           <TextField
