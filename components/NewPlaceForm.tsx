@@ -19,16 +19,9 @@ import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 type NewPlaceFormProps = {
   place: google.maps.places.PlaceResult;
   closeModal: () => void;
-  setSelectedPlace: React.Dispatch<
-    React.SetStateAction<google.maps.places.PlaceResult | null>
-  >;
 };
 
-export default function NewPlaceForm({
-  place,
-  closeModal,
-  setSelectedPlace,
-}: NewPlaceFormProps) {
+export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
   const [newPlaceData, setNewPlaceData] = useState<Place>({
     name: place.name,
@@ -58,7 +51,6 @@ export default function NewPlaceForm({
     e.preventDefault();
     const docRef = await addDoc(entriesCollection, place);
     closeModal();
-    setSelectedPlace(null);
   }
 
   function handleFormChange(e: React.ChangeEvent<HTMLInputElement>) {
