@@ -77,7 +77,13 @@ export default function DisplayMap() {
                 <Typography variant="body2" gutterBottom={true}>
                   {selectedPlace?.formatted_address}
                 </Typography>
-                <Button variant="contained" onClick={() => setModalOpen(true)}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setModalOpen(true);
+                    setInfoWindowShown(false);
+                  }}
+                >
                   Review
                 </Button>
               </Box>
