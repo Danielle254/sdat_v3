@@ -44,7 +44,9 @@ export default function ModalBox({
         >
           <Close />
         </IconButton>
-        {selectedPlace && <NewPlaceForm place={selectedPlace} />}
+        {selectedPlace && (
+          <NewPlaceForm place={selectedPlace} closeModal={handleCloseModal} />
+        )}
       </Box>
     </Modal>
   );
