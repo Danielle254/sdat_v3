@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -11,13 +12,81 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import type { Place } from "../types/place";
+import { entriesCollection, /* auth, */ database } from "../api/firebase";
+import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 
 type NewPlaceFormProps = {
   place: google.maps.places.PlaceResult;
+  closeModal: () => void;
+  setSelectedPlace: React.Dispatch<
+    React.SetStateAction<google.maps.places.PlaceResult | null>
+  >;
 };
 
-export default function NewPlaceForm({ place }: NewPlaceFormProps) {
+export default function NewPlaceForm({
+  place,
+  closeModal,
+  setSelectedPlace,
+}: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
+  const [newPlaceData, setNewPlaceData] = useState<Place>({
+    name: place.name,
+    address: place.formatted_address,
+    coords: {
+      lat: place.geometry?.location?.lat(),
+      lng: place.geometry?.location?.lng(),
+    },
+    author: "",
+    isFavorite: false,
+    dateVisited: "",
+    accessIssues: false,
+    safetyIssues: false,
+    staffIssues: false,
+    floorIssues: false,
+    spaceIssues: false,
+    privateNote: "",
+    rating: null,
+    recommended: false,
+    review: "",
+  });
+
+  async function addNewPlace(
+    e: React.FormEvent<HTMLFormElement>,
+    place: Place
+  ) {
+    e.preventDefault();
+    const docRef = await addDoc(entriesCollection, place);
+    closeModal();
+    setSelectedPlace(null);
+  }
+
+  function handleFormChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.currentTarget;
+    const inputType = e.currentTarget.type;
+
+    if (inputType === "checkbox") {
+      setNewPlaceData({
+        ...newPlaceData,
+        [name]: e.target.checked,
+      });
+    } else {
+      setNewPlaceData({
+        ...newPlaceData,
+        [name]: value,
+      });
+    }
+  }
+
+  function handleRatingChange(
+    e: React.SyntheticEvent,
+    value: number | null
+  ): void {
+    setNewPlaceData({
+      ...newPlaceData,
+      rating: value,
+    });
+  }
   return (
     <>
       <Typography
@@ -32,7 +101,11 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
         {place.formatted_address}
       </Typography>
       <Divider sx={{ my: 2 }} />
-      <form>
+      <form
+        onSubmit={(e) => {
+          addNewPlace(e, newPlaceData);
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -42,7 +115,7 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           }}
         >
           <label htmlFor="visit-date" style={{ fontSize: "16px" }}>
-            Date Visited
+            Date Visited*
           </label>
           <input
             required
@@ -57,10 +130,11 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
               fontSize: "16px",
               cursor: "pointer",
             }}
+            value={newPlaceData.dateVisited}
+            onChange={handleFormChange}
           />
         </div>
         <Divider sx={{ my: 2 }} />
-
         <Typography variant="body1" sx={{ fontWeight: "bold" }}>
           Issues
         </Typography>
@@ -68,18 +142,54 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           Did you experience any of these difficulties during your visit?
         </Typography>
         <FormGroup sx={{ my: 2 }}>
-          <FormControlLabel control={<Switch />} label="Access Issues" />
-          <FormControlLabel control={<Switch />} label="Safety Issues" />
           <FormControlLabel
-            control={<Switch />}
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.accessIssues}
+                name="accessIssues"
+              />
+            }
+            label="Access Issues"
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.safetyIssues}
+                name="safetyIssues"
+              />
+            }
+            label="Safety Issues"
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.staffIssues}
+                name="staffIssues"
+              />
+            }
             label="Rude or Untrained Staff"
           />
           <FormControlLabel
-            control={<Switch />}
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.floorIssues}
+                name="floorIssues"
+              />
+            }
             label="Dirty/Hazardous Floor"
           />
           <FormControlLabel
-            control={<Switch />}
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.spaceIssues}
+                name="spaceIssues"
+              />
+            }
             label="Insufficient Space for Service Dog"
           />
         </FormGroup>
@@ -105,6 +215,9 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
                 color="error"
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
+                checked={newPlaceData.isFavorite}
+                onChange={handleFormChange}
+                name="isFavorite"
               />
             }
             label="Favorite"
@@ -113,9 +226,11 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           <TextField
             multiline
             minRows={4}
-            id="outlined-textarea"
             label="Private Note"
+            name="privateNote"
             sx={{ my: 2 }}
+            onChange={handleFormChange}
+            value={newPlaceData.privateNote}
           />
         </FormGroup>
         <Divider sx={{ my: 2 }} />
@@ -130,20 +245,34 @@ export default function NewPlaceForm({ place }: NewPlaceFormProps) {
           These details are visible to other users.
         </Typography>
         <FormGroup sx={{ my: 2 }}>
-          <Typography component="legend">Overall Rating</Typography>
-          <Rating name="rating" precision={1} size="large" />
+          <Typography component="legend">Overall Rating*</Typography>
+          <Rating
+            name="rating"
+            precision={1}
+            size="large"
+            onChange={handleRatingChange}
+            value={newPlaceData.rating}
+          />
           <FormControlLabel
-            control={<Switch />}
+            control={
+              <Switch
+                onChange={handleFormChange}
+                checked={newPlaceData.recommended}
+                name="recommended"
+              />
+            }
             label="Recommend to Other Service Dog Handlers"
             sx={{ my: 2 }}
           />
-          <Typography variant="body1">Review</Typography>
+          <Typography variant="body1">Review*</Typography>
           <TextField
             multiline
             minRows={4}
             placeholder="Describe your experience"
-            id="outlined-textarea"
             required={true}
+            onChange={handleFormChange}
+            name="review"
+            value={newPlaceData.review}
           />
         </FormGroup>
         <Button variant="contained" type="submit" sx={{ mt: 2 }}>
