@@ -13,8 +13,8 @@ import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import type { NewPlace } from "../types/place";
-import { entriesCollection, /* auth, */ database } from "../api/firebase";
-import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
+import { entriesCollection } from "../api/firebase";
+import { addDoc } from "firebase/firestore";
 
 type NewPlaceFormProps = {
   place: google.maps.places.PlaceResult;
