@@ -12,7 +12,7 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import type { Place } from "../types/place";
+import type { NewPlace } from "../types/place";
 import { entriesCollection, /* auth, */ database } from "../api/firebase";
 import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 
@@ -23,7 +23,7 @@ type NewPlaceFormProps = {
 
 export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const [newPlaceData, setNewPlaceData] = useState<Place>({
+  const [newPlaceData, setNewPlaceData] = useState<NewPlace>({
     name: place.name,
     address: place.formatted_address,
     coords: {
@@ -46,7 +46,7 @@ export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
 
   async function addNewPlace(
     e: React.FormEvent<HTMLFormElement>,
-    place: Place
+    place: NewPlace
   ) {
     e.preventDefault();
     const docRef = await addDoc(entriesCollection, place);
@@ -107,7 +107,7 @@ export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
           }}
         >
           <label htmlFor="visit-date" style={{ fontSize: "16px" }}>
-            Date Visited*
+            Date Visited
           </label>
           <input
             required
@@ -237,7 +237,7 @@ export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
           These details are visible to other users.
         </Typography>
         <FormGroup sx={{ my: 2 }}>
-          <Typography component="legend">Overall Rating*</Typography>
+          <Typography component="legend">Overall Rating</Typography>
           <Rating
             name="rating"
             precision={1}
@@ -256,7 +256,7 @@ export default function NewPlaceForm({ place, closeModal }: NewPlaceFormProps) {
             label="Recommend to Other Service Dog Handlers"
             sx={{ my: 2 }}
           />
-          <Typography variant="body1">Review*</Typography>
+          <Typography variant="body1">Review</Typography>
           <TextField
             multiline
             minRows={4}
