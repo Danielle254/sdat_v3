@@ -19,7 +19,12 @@ import { entriesCollection } from "../api/firebase";
 import { getDocs } from "firebase/firestore";
 import type { PlaceType } from "../types/place";
 
-export default function DisplayMap() {
+type DisplayMapProps = {
+  isLoggedIn: boolean;
+  author: string;
+};
+
+export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
   const [zoom, setZoom] = useState(5);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
@@ -154,6 +159,7 @@ export default function DisplayMap() {
           name={selectedPlace.name}
           address={selectedPlace.formatted_address}
           coords={selectedPlace.geometry?.location}
+          author={author}
         />
       )}
     </APIProvider>

@@ -24,6 +24,7 @@ interface NewPlaceFormProps {
   coords: google.maps.LatLng;
   modalOpen: boolean;
   handleCloseModal: () => void;
+  author: string;
 }
 
 export default function NewPlaceForm({
@@ -32,6 +33,7 @@ export default function NewPlaceForm({
   coords,
   modalOpen,
   handleCloseModal,
+  author,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
   const [newPlaceData, setNewPlaceData] = useState<PlaceType>({

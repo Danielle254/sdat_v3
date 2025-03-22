@@ -8,27 +8,38 @@ import GoogleIcon from "@mui/icons-material/Google";
 import PetsIcon from "@mui/icons-material/Pets";
 import Link from "next/link";
 
-export default function NavLinksList() {
+type NavLinksProps = {
+  isLoggedIn: boolean;
+  googleLogin: () => void;
+  handleLogout: () => void;
+};
+
+export default function NavLinksList({
+  isLoggedIn,
+  googleLogin,
+  handleLogout,
+}: NavLinksProps) {
   return (
     <>
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
-            <Link
-              href="/login"
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <ListItemIcon>
-                <GoogleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Login with Google" />
-            </Link>
+          <ListItemButton
+            sx={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onClick={isLoggedIn ? handleLogout : googleLogin}
+            component="button"
+          >
+            <ListItemIcon>
+              <GoogleIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={isLoggedIn ? "Logout" : "Login with Google"}
+            />
           </ListItemButton>
         </ListItem>
       </List>

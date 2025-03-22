@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ThemeRegistry from "../../theme/ThemeRegistry";
 import "./globals.css";
+import { MapContextProvider } from "./context";
 
 export const metadata: Metadata = {
   title: "Service Dogs Around Town",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeRegistry>
-        <body>{children}</body>
+        <body>
+          <MapContextProvider>{children}</MapContextProvider>
+        </body>
       </ThemeRegistry>
     </html>
   );
