@@ -14,7 +14,17 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NavLinksList from "./NavLinksList";
 import Divider from "@mui/material/Divider";
 
-export default function NavBar() {
+type NavBarProps = {
+  isLoggedIn: boolean;
+  googleLogin: () => void;
+  handleLogout: () => void;
+};
+
+export default function NavBar({
+  isLoggedIn,
+  googleLogin,
+  handleLogout,
+}: NavBarProps) {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -65,7 +75,11 @@ export default function NavBar() {
                 <ChevronRightIcon />
               </IconButton>
               <Divider />
-              <NavLinksList />
+              <NavLinksList
+                isLoggedIn={isLoggedIn}
+                googleLogin={googleLogin}
+                handleLogout={handleLogout}
+              />
             </Box>
           </Drawer>
         </Toolbar>
