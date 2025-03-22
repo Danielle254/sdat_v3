@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface PlaceAutocompleteProps {
   onPlaceSelect: (
-    place: google.maps.places.PlaceResult | null
+    place: google.maps.places.PlaceResult
   ) => void | React.Dispatch<React.SetStateAction<null>>;
 }
 

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useMap } from "@vis.gl/react-google-maps";
 
-type MapHandlerProps = {
-  place: google.maps.places.PlaceResult | null;
+interface MapHandlerProps {
+  place?: google.maps.places.PlaceResult;
   marker: google.maps.marker.AdvancedMarkerElement | null;
-};
+}
 
 export default function MapHandler({ place, marker }: MapHandlerProps) {
   const map = useMap();
