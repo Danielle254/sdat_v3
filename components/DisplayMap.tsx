@@ -16,30 +16,29 @@ import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NewPlace from "./NewPlace";
 import { entriesCollection } from "../api/firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
-import type { NewPlaceType, ExistingPlaceType } from "../types/place";
+import { getDocs } from "firebase/firestore";
+import type { PlaceType } from "../types/place";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(5);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [selectedPlace, setSelectedPlace] =
-    useState<google.maps.places.PlaceResult>();
-  const [activeMarker, setActiveMarker] = useState<ExistingPlaceType | null>(
-    null
-  );
+    useState<google.maps.places.PlaceResult | null>(null);
+  const [activeMarker, setActiveMarker] = useState<PlaceType | null>(null);
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
-  const [places, setPlaces] = useState<ExistingPlaceType[]>([]);
+  const [places, setPlaces] = useState<PlaceType[]>([]);
 
   async function getData() {
     const querySnapshot = await getDocs(entriesCollection);
     const entriesArr: any = [];
     querySnapshot.forEach((doc) => {
-      entriesArr.push({ ...doc.data(), id: doc.id });
+      entriesArr.push(doc.data());
     });
-    setPlaces(entriesArr);
+    const convertedData: PlaceType[] = entriesArr;
+    setPlaces(convertedData);
   }
 
   useEffect(() => {
@@ -145,15 +144,17 @@ export default function DisplayMap() {
             </InfoWindow>
           )}
         </Map>
-        <MapHandler place={selectedPlace} marker={marker} />
+        {selectedPlace && <MapHandler place={selectedPlace} marker={marker} />}
       </div>
-      <NewPlace
-        modalOpen={modalOpen}
-        handleCloseModal={() => setModalOpen(false)}
-        name={selectedPlace?.name}
-        address={selectedPlace?.formatted_address}
-        coords={selectedPlace?.geometry?.location}
-      />
+      {selectedPlace && (
+        <NewPlace
+          modalOpen={modalOpen}
+          handleCloseModal={() => setModalOpen(false)}
+          name={selectedPlace.name}
+          address={selectedPlace.formatted_address}
+          coords={selectedPlace.geometry?.location}
+        />
+      )}
     </APIProvider>
   );
 }

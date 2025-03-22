@@ -1,25 +1,7 @@
-export interface NewPlaceType {
+export interface PlaceType {
   name: string | undefined;
   address: string | undefined;
-  coords: google.maps.LatLng | undefined;
-  author: string;
-  isFavorite: boolean;
-  dateVisited: string;
-  accessIssues: boolean;
-  safetyIssues: boolean;
-  staffIssues: boolean;
-  floorIssues: boolean;
-  spaceIssues: boolean;
-  privateNote: string;
-  rating: number | null;
-  recommended: boolean;
-  review: string;
-}
-
-export interface ExistingPlaceType {
-  name: string | undefined;
-  address: string | undefined;
-  coords: google.maps.LatLng;
+  coords: Coords;
   author: string;
   isFavorite: boolean;
   dateVisited: string;
@@ -34,3 +16,8 @@ export interface ExistingPlaceType {
   review: string;
   id: string;
 }
+
+type Coords = {
+  lat: number;
+  lng: number;
+};
