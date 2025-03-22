@@ -12,10 +12,11 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import type { NewPlaceType } from "../types/place";
+import type { PlaceType } from "../types/place";
 import { entriesCollection } from "../api/firebase";
 import { addDoc } from "firebase/firestore";
 import ModalBox from "./ModalBox";
+import { v4 as uuidv4 } from "uuid";
 
 interface NewPlaceFormProps {
   name: string | undefined;
@@ -33,10 +34,10 @@ export default function NewPlaceForm({
   handleCloseModal,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const [newPlaceData, setNewPlaceData] = useState<NewPlaceType>({
+  const [newPlaceData, setNewPlaceData] = useState<PlaceType>({
     name: name,
     address: address,
-    coords: coords,
+    coords: { lat: coords?.lat()!, lng: coords?.lng()! },
     author: "",
     isFavorite: false,
     dateVisited: "",
@@ -49,11 +50,12 @@ export default function NewPlaceForm({
     rating: null,
     recommended: false,
     review: "",
+    id: uuidv4(),
   });
 
   async function addNewPlace(
     e: React.FormEvent<HTMLFormElement>,
-    place: NewPlaceType
+    place: PlaceType
   ) {
     e.preventDefault();
     const docRef = await addDoc(entriesCollection, place);
@@ -75,6 +77,7 @@ export default function NewPlaceForm({
         [name]: value,
       });
     }
+    console.log(newPlaceData);
   }
 
   function handleRatingChange(

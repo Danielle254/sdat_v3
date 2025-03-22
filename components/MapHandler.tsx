@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMap } from "@vis.gl/react-google-maps";
 
 interface MapHandlerProps {
-  place?: google.maps.places.PlaceResult;
+  place?: google.maps.places.PlaceResult | null;
   marker: google.maps.marker.AdvancedMarkerElement | null;
 }
 

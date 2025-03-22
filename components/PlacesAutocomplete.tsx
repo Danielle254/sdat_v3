@@ -1,10 +1,9 @@
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import React, { useEffect, useRef, useState } from "react";
+import type { SearchedPlaceType } from "../types/place";
 
 interface PlaceAutocompleteProps {
-  onPlaceSelect: (
-    place: google.maps.places.PlaceResult
-  ) => void | React.Dispatch<React.SetStateAction<null>>;
+  onPlaceSelect: (place: SearchedPlaceType) => void;
 }
 
 export default function PlacesAutocomplete({
@@ -31,7 +30,13 @@ export default function PlacesAutocomplete({
     if (!placeAutocomplete) return;
 
     placeAutocomplete.addListener("place_changed", () => {
-      onPlaceSelect(placeAutocomplete.getPlace());
+      if (typeof placeAutocomplete.getPlace() !== "undefined") {
+        onPlaceSelect({
+          name: placeAutocomplete.getPlace().name!,
+          address: placeAutocomplete.getPlace().formatted_address!,
+          coordinates: placeAutocomplete.getPlace().geometry?.location!,
+        });
+      }
     });
   }, [onPlaceSelect, placeAutocomplete]);
 

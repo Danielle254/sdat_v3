@@ -16,30 +16,32 @@ import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NewPlace from "./NewPlace";
 import { entriesCollection } from "../api/firebase";
-import { collection, doc, getDocs } from "firebase/firestore";
-import type { NewPlaceType, ExistingPlaceType } from "../types/place";
+import { getDocs } from "firebase/firestore";
+import type { PlaceType, SearchedPlaceType } from "../types/place";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(5);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
-  const [selectedPlace, setSelectedPlace] =
-    useState<google.maps.places.PlaceResult>();
-  const [activeMarker, setActiveMarker] = useState<ExistingPlaceType | null>(
-    null
-  );
+  const [selectedPlace, setSelectedPlace] = useState<SearchedPlaceType>({
+    name: "",
+    address: "",
+    coordinates: new google.maps.LatLng(0, 0),
+  });
+  const [activeMarker, setActiveMarker] = useState<PlaceType | null>(null);
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
-  const [places, setPlaces] = useState<ExistingPlaceType[]>([]);
+  const [places, setPlaces] = useState<PlaceType[]>([]);
 
   async function getData() {
     const querySnapshot = await getDocs(entriesCollection);
     const entriesArr: any = [];
     querySnapshot.forEach((doc) => {
-      entriesArr.push({ ...doc.data(), id: doc.id });
+      entriesArr.push(doc.data());
     });
-    setPlaces(entriesArr);
+    const convertedData: PlaceType[] = entriesArr;
+    setPlaces(convertedData);
   }
 
   useEffect(() => {
@@ -99,13 +101,14 @@ export default function DisplayMap() {
                   {selectedPlace?.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom={true}>
-                  {selectedPlace?.formatted_address}
+                  {selectedPlace?.address}
                 </Typography>
                 <Button
                   variant="contained"
                   onClick={() => {
                     setModalOpen(true);
                     setInfoWindowShown(false);
+                    console.log(selectedPlace);
                   }}
                 >
                   Review
@@ -147,13 +150,15 @@ export default function DisplayMap() {
         </Map>
         <MapHandler place={selectedPlace} marker={marker} />
       </div>
-      <NewPlace
-        modalOpen={modalOpen}
-        handleCloseModal={() => setModalOpen(false)}
-        name={selectedPlace?.name}
-        address={selectedPlace?.formatted_address}
-        coords={selectedPlace?.geometry?.location}
-      />
+      {selectedPlace && (
+        <NewPlace
+          modalOpen={modalOpen}
+          handleCloseModal={() => setModalOpen(false)}
+          name={selectedPlace?.name}
+          address={selectedPlace?.address}
+          coords={selectedPlace?.coordinates}
+        />
+      )}
     </APIProvider>
   );
 }
