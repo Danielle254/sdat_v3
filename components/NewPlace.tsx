@@ -12,7 +12,7 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import type { NewPlace } from "../types/place";
+import type { NewPlaceType } from "../types/place";
 import { entriesCollection } from "../api/firebase";
 import { addDoc } from "firebase/firestore";
 import ModalBox from "./ModalBox";
@@ -33,7 +33,7 @@ export default function NewPlaceForm({
   handleCloseModal,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const [newPlaceData, setNewPlaceData] = useState<NewPlace>({
+  const [newPlaceData, setNewPlaceData] = useState<NewPlaceType>({
     name: name,
     address: address,
     coords: coords,
@@ -53,7 +53,7 @@ export default function NewPlaceForm({
 
   async function addNewPlace(
     e: React.FormEvent<HTMLFormElement>,
-    place: NewPlace
+    place: NewPlaceType
   ) {
     e.preventDefault();
     const docRef = await addDoc(entriesCollection, place);
