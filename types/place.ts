@@ -1,4 +1,4 @@
-export interface NewPlace {
+export interface NewPlaceType {
   name: string | undefined;
   address: string | undefined;
   coords: google.maps.LatLng | undefined;
@@ -16,7 +16,7 @@ export interface NewPlace {
   review: string;
 }
 
-export interface ExistingPlace {
+export interface ExistingPlaceType {
   name: string | undefined;
   address: string | undefined;
   coords: google.maps.LatLng;
