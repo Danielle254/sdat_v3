@@ -77,6 +77,7 @@ export default function NewPlaceForm({
         [name]: value,
       });
     }
+    console.log(newPlaceData);
   }
 
   function handleRatingChange(

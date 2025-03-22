@@ -105,6 +105,7 @@ export default function DisplayMap() {
                   onClick={() => {
                     setModalOpen(true);
                     setInfoWindowShown(false);
+                    console.log(selectedPlace);
                   }}
                 >
                   Review
