@@ -1,7 +1,7 @@
-export interface Place {
+export interface NewPlace {
   name: string | undefined;
   address: string | undefined;
-  coords: Coords;
+  coords: google.maps.LatLng | undefined;
   author: string;
   isFavorite: boolean;
   dateVisited: string;
@@ -16,7 +16,21 @@ export interface Place {
   review: string;
 }
 
-type Coords = {
-  lat: number | undefined;
-  lng: number | undefined;
-};
+export interface ExistingPlace {
+  name: string | undefined;
+  address: string | undefined;
+  coords: google.maps.LatLng;
+  author: string;
+  isFavorite: boolean;
+  dateVisited: string;
+  accessIssues: boolean;
+  safetyIssues: boolean;
+  staffIssues: boolean;
+  floorIssues: boolean;
+  spaceIssues: boolean;
+  privateNote: string;
+  rating: number | null;
+  recommended: boolean;
+  review: string;
+  id: string;
+}
