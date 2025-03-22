@@ -4,8 +4,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import PersonIcon from "@mui/icons-material/Person";
-import InfoIcon from "@mui/icons-material/Info";
+import GoogleIcon from "@mui/icons-material/Google";
+import PetsIcon from "@mui/icons-material/Pets";
 import Link from "next/link";
 
 export default function NavLinksList() {
@@ -25,9 +25,9 @@ export default function NavLinksList() {
               }}
             >
               <ListItemIcon>
-                <PersonIcon />
+                <GoogleIcon />
               </ListItemIcon>
-              <ListItemText primary="Login" />
+              <ListItemText primary="Login with Google" />
             </Link>
           </ListItemButton>
         </ListItem>
@@ -46,9 +46,9 @@ export default function NavLinksList() {
               }}
             >
               <ListItemIcon>
-                <InfoIcon />
+                <PetsIcon />
               </ListItemIcon>
-              <ListItemText primary="Info" />
+              <ListItemText primary="About this App" />
             </Link>
           </ListItemButton>
         </ListItem>
