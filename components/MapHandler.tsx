@@ -6,7 +6,7 @@ interface MapHandlerProps {
   marker: google.maps.marker.AdvancedMarkerElement | null;
 }
 
-export default function MapHandler({ place, marker }: MapHandlerProps) {
+export default function MapHandler({ place, marker }: MapHandlerProps): void {
   const map = useMap();
 
   useEffect(() => {
