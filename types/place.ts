@@ -1,5 +1,4 @@
 export interface PlaceType {
-export interface PlaceType {
   name: string | undefined;
   address: string | undefined;
   coords: Coords;
