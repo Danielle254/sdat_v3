@@ -21,6 +21,7 @@ export default function NavLinksList() {
                 color: "inherit",
                 display: "flex",
                 flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <ListItemIcon>
@@ -41,6 +42,7 @@ export default function NavLinksList() {
                 color: "inherit",
                 display: "flex",
                 flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <ListItemIcon>
