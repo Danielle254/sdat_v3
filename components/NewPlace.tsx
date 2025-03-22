@@ -77,7 +77,6 @@ export default function NewPlaceForm({
         [name]: value,
       });
     }
-    console.log(newPlaceData);
   }
 
   function handleRatingChange(
@@ -107,6 +106,24 @@ export default function NewPlaceForm({
         <form
           onSubmit={(e) => {
             addNewPlace(e, newPlaceData);
+            setNewPlaceData({
+              name: "",
+              address: "",
+              coords: null,
+              author: "",
+              isFavorite: false,
+              dateVisited: "",
+              accessIssues: false,
+              safetyIssues: false,
+              staffIssues: false,
+              floorIssues: false,
+              spaceIssues: false,
+              privateNote: "",
+              rating: null,
+              recommended: false,
+              review: "",
+              id: "",
+            });
           }}
         >
           <div
