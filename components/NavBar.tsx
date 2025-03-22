@@ -50,7 +50,7 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Drawer open={open} anchor="right" onClose={toggleDrawer(false)}>
-            <Box sx={{ width: 250 }} role="presentation">
+            <Box sx={{ width: 300 }} role="presentation">
               <IconButton
                 size="large"
                 color="inherit"
