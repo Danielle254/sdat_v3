@@ -12,12 +12,12 @@ import {
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import React from "react";
-import { Box, Button } from "@mui/material";
-import Typography from "@mui/material/Typography";
+
 import NewPlace from "./NewPlace";
 import { entriesCollection } from "../api/firebase";
 import { getDocs } from "firebase/firestore";
 import type { PlaceType } from "../types/place";
+import InfoWindowContent from "./InfoWindowContent";
 
 type DisplayMapProps = {
   isLoggedIn: boolean;
@@ -88,34 +88,19 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
               scale={1.2}
             />
           </AdvancedMarker>
-          {infoWindowShown && (
+          {infoWindowShown && selectedPlace && (
             <InfoWindow
               anchor={marker}
               onClose={handleClose}
               shouldFocus={true}
             >
-              <Box>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: "bold" }}
-                  gutterBottom={true}
-                >
-                  {selectedPlace?.name}
-                </Typography>
-                <Typography variant="body2" gutterBottom={true}>
-                  {selectedPlace?.formatted_address}
-                </Typography>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setModalOpen(true);
-                    setInfoWindowShown(false);
-                    console.log(selectedPlace);
-                  }}
-                >
-                  Review
-                </Button>
-              </Box>
+              <InfoWindowContent
+                type="newPlace"
+                name={selectedPlace.name}
+                address={selectedPlace.formatted_address}
+                setModalOpen={setModalOpen}
+                setInfoWindowShown={setInfoWindowShown}
+              />
             </InfoWindow>
           )}
           {places.map((place) => (
@@ -138,15 +123,11 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
               position={activeMarker.coords}
               onCloseClick={() => setActiveMarker(null)}
             >
-              <div>
-                <p>{activeMarker.name}</p>
-                <p>{/* {cityState(activeMarker.address)} */}</p>
-                <button
-                /* onClick={() => openModal(activeMarker.id)} */
-                >
-                  View Details
-                </button>
-              </div>
+              <InfoWindowContent
+                type="existingPlace"
+                name={activeMarker.name}
+                address={activeMarker.address}
+              />
             </InfoWindow>
           )}
         </Map>
