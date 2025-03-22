@@ -13,6 +13,7 @@ import logo from "../public/logo.png";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NavLinksList from "./NavLinksList";
 import Divider from "@mui/material/Divider";
+import Link from "next/link";
 
 type NavBarProps = {
   isLoggedIn: boolean;
@@ -33,22 +34,38 @@ export default function NavBar({
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <Image
-            src={logo}
-            height={30}
-            alt=""
-            width={30}
-            style={{ marginRight: "5px" }}
-          />
-          <Typography
-            variant="h1"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            fontSize="h5.fontSize"
+        <Toolbar
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Link
+            href="/"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "flex",
+              flexDirection: "row",
+            }}
           >
-            Service Dogs Around Town
-          </Typography>
+            <Image
+              src={logo}
+              height={30}
+              alt=""
+              width={30}
+              style={{ marginRight: "5px" }}
+            />
+            <Typography
+              variant="h1"
+              component="div"
+              sx={{ flexGrow: 1 }}
+              fontSize="h5.fontSize"
+            >
+              Service Dogs Around Town
+            </Typography>
+          </Link>
           <IconButton
             size="large"
             edge="start"
