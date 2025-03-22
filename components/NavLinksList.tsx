@@ -6,7 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import GoogleIcon from "@mui/icons-material/Google";
 import PetsIcon from "@mui/icons-material/Pets";
-import Link from "next/link";
+import HomeIcon from "@mui/icons-material/Home";
 
 type NavLinksProps = {
   isLoggedIn: boolean;
@@ -24,13 +24,6 @@ export default function NavLinksList({
       <List>
         <ListItem disablePadding>
           <ListItemButton
-            sx={{
-              textDecoration: "none",
-              color: "inherit",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
             onClick={isLoggedIn ? handleLogout : googleLogin}
             component="button"
           >
@@ -42,25 +35,20 @@ export default function NavLinksList({
             />
           </ListItemButton>
         </ListItem>
-      </List>
-      <List>
         <ListItem disablePadding>
-          <ListItemButton>
-            <Link
-              href="/info"
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <ListItemIcon>
-                <PetsIcon />
-              </ListItemIcon>
-              <ListItemText primary="About this App" />
-            </Link>
+          <ListItemButton href="/info">
+            <ListItemIcon>
+              <PetsIcon />
+            </ListItemIcon>
+            <ListItemText primary="About this App" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton href="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
       </List>
