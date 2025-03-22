@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import NewPlaceForm from "./NewPlaceForm";
+import NewPlaceForm from "./NewPlace";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";
@@ -8,13 +8,13 @@ import { Close } from "@mui/icons-material";
 type ModalBoxProps = {
   modalOpen: boolean;
   handleCloseModal: () => void;
-  selectedPlace: google.maps.places.PlaceResult | null;
+  children: React.ReactNode;
 };
 
 export default function ModalBox({
   modalOpen,
   handleCloseModal,
-  selectedPlace,
+  children,
 }: ModalBoxProps) {
   return (
     <Modal open={modalOpen} onClose={handleCloseModal}>
@@ -44,9 +44,7 @@ export default function ModalBox({
         >
           <Close />
         </IconButton>
-        {selectedPlace && (
-          <NewPlaceForm place={selectedPlace} closeModal={handleCloseModal} />
-        )}
+        {children}
       </Box>
     </Modal>
   );
