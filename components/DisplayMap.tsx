@@ -127,6 +127,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
                 type="existingPlace"
                 name={activeMarker.name}
                 address={activeMarker.address}
+                rating={activeMarker.rating}
               />
             </InfoWindow>
           )}
