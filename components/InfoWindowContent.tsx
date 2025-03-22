@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import cityState from "../utils/cityState";
+import Rating from "@mui/material/Rating";
 
 type InfoWindowContentProps = {
   type: "newPlace" | "existingPlace";
@@ -9,6 +10,7 @@ type InfoWindowContentProps = {
   address: string;
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setInfoWindowShown?: React.Dispatch<React.SetStateAction<boolean>>;
+  rating?: number;
 };
 
 export default function InfoWindowContent({
@@ -17,10 +19,11 @@ export default function InfoWindowContent({
   address,
   setModalOpen,
   setInfoWindowShown,
+  rating,
 }: InfoWindowContentProps) {
   if (type === "newPlace") {
     return (
-      <Box>
+      <Box sx={{ minWidth: "200px" }}>
         <Typography
           variant="body1"
           sx={{ fontWeight: "bold" }}
@@ -37,6 +40,7 @@ export default function InfoWindowContent({
             setModalOpen(true);
             setInfoWindowShown(false);
           }}
+          fullWidth
         >
           Review
         </Button>
@@ -46,7 +50,7 @@ export default function InfoWindowContent({
 
   if (type === "existingPlace") {
     return (
-      <Box>
+      <Box sx={{ minWidth: "200px" }}>
         <Typography
           variant="body1"
           sx={{ fontWeight: "bold" }}
@@ -54,10 +58,13 @@ export default function InfoWindowContent({
         >
           {name}
         </Typography>
+        <Rating readOnly value={rating} size="small" />
         <Typography variant="body2" gutterBottom={true}>
           {cityState(address)}
         </Typography>
-        <Button variant="contained">View Details</Button>
+        <Button variant="contained" fullWidth>
+          View
+        </Button>
       </Box>
     );
   }
