@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import NewPlaceForm from "./NewPlace";
+import NewPlaceForm from "../form/NewPlace";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { Close } from "@mui/icons-material";

@@ -13,10 +13,10 @@ import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import React from "react";
 
-import NewPlace from "./NewPlace";
-import { entriesCollection } from "../api/firebase";
+import NewPlace from "../form/NewPlace";
+import { entriesCollection } from "../../api/firebase";
 import { getDocs } from "firebase/firestore";
-import type { PlaceType } from "../types/place";
+import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 
 type DisplayMapProps = {

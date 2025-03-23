@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
-import logo from "../public/logo.png";
+import logo from "../../public/logo.png";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NavLinksList from "./NavLinksList";
 import Divider from "@mui/material/Divider";

@@ -12,10 +12,10 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import type { PlaceType } from "../types/place";
-import { entriesCollection } from "../api/firebase";
+import type { PlaceType } from "../../types/place";
+import { entriesCollection } from "../../api/firebase";
 import { addDoc } from "firebase/firestore";
-import ModalBox from "./ModalBox";
+import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
 
 interface NewPlaceFormProps {

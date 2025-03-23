@@ -1,9 +1,9 @@
 "use client";
 
-import DisplayMap from "../../components/DisplayMap";
+import DisplayMap from "../../components/map/DisplayMap";
 import { useContext } from "react";
 import { MapContext } from "./context";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/nav/NavBar";
 
 export default function Home() {
   const { isLoggedIn, userId, googleLogin, handleLogout } =
