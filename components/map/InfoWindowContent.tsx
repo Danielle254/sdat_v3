@@ -63,14 +63,13 @@ export default function InfoWindowContent({
           gap: 1,
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{ fontWeight: "bold" }}
-          gutterBottom={true}
-        >
+        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
           {name}
         </Typography>
-        <Rating readOnly value={rating} size="small" />
+        <Typography variant="body2" gutterBottom={true}>
+          {cityState(address)}
+        </Typography>
+        <Rating readOnly value={rating} size="medium" />
         {recommended && (
           <Chip
             icon={<ThumbUpIcon />}
@@ -80,13 +79,11 @@ export default function InfoWindowContent({
             sx={{ maxWidth: "min-content", px: 1 }}
           />
         )}
-        <Typography variant="body2" gutterBottom={true}>
-          {cityState(address)}
-        </Typography>
         <Button
           variant="contained"
           fullWidth
           onClick={() => setModalOpen(true)}
+          sx={{ mt: 2 }}
         >
           View
         </Button>
