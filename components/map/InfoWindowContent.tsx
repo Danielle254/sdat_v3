@@ -10,8 +10,7 @@ type InfoWindowContentProps = {
   type: "newPlace" | "existingPlace";
   name: string;
   address: string;
-
-  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setInfoWindowShown?: React.Dispatch<React.SetStateAction<boolean>>;
   rating?: number;
   recommended?: boolean;
@@ -23,6 +22,7 @@ export default function InfoWindowContent({
   address,
   setModalOpen,
   setInfoWindowShown,
+
   rating,
   recommended,
 }: InfoWindowContentProps) {
@@ -83,7 +83,11 @@ export default function InfoWindowContent({
         <Typography variant="body2" gutterBottom={true}>
           {cityState(address)}
         </Typography>
-        <Button variant="contained" fullWidth>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => setModalOpen(true)}
+        >
           View
         </Button>
       </Box>
