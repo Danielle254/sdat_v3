@@ -5,6 +5,7 @@ import cityState from "../../utils/cityState";
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { PlaceType } from "../../types/place";
 
 type InfoWindowContentProps = {
   type: "newPlace" | "existingPlace";
@@ -14,6 +15,10 @@ type InfoWindowContentProps = {
   setInfoWindowShown?: React.Dispatch<React.SetStateAction<boolean>>;
   rating?: number;
   recommended?: boolean;
+  resolveMarker?: React.Dispatch<React.SetStateAction<PlaceType>>;
+  resolvePlace?: React.Dispatch<
+    React.SetStateAction<google.maps.places.PlaceResult>
+  >;
 };
 
 export default function InfoWindowContent({
@@ -22,7 +27,8 @@ export default function InfoWindowContent({
   address,
   setModalOpen,
   setInfoWindowShown,
-
+  resolveMarker,
+  resolvePlace,
   rating,
   recommended,
 }: InfoWindowContentProps) {
@@ -44,6 +50,7 @@ export default function InfoWindowContent({
           onClick={() => {
             setModalOpen(true);
             setInfoWindowShown(false);
+            resolveMarker(null);
           }}
           fullWidth
         >
@@ -82,7 +89,10 @@ export default function InfoWindowContent({
         <Button
           variant="contained"
           fullWidth
-          onClick={() => setModalOpen(true)}
+          onClick={() => {
+            setModalOpen(true);
+            resolvePlace(null);
+          }}
           sx={{ mt: 2 }}
         >
           View

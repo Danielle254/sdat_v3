@@ -101,6 +101,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
                 address={selectedPlace.formatted_address}
                 setModalOpen={setModalOpen}
                 setInfoWindowShown={setInfoWindowShown}
+                resolveMarker={setActiveMarker}
               />
             </InfoWindow>
           )}
@@ -131,6 +132,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
                 rating={activeMarker.rating}
                 recommended={activeMarker.recommended}
                 setModalOpen={setModalOpen}
+                resolvePlace={setSelectedPlace}
               />
             </InfoWindow>
           )}
