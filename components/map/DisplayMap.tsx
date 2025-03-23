@@ -18,6 +18,7 @@ import { entriesCollection } from "../../api/firebase";
 import { getDocs } from "firebase/firestore";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
+import DetailView from "../display/DetailView";
 
 type DisplayMapProps = {
   isLoggedIn: boolean;
@@ -129,6 +130,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
                 address={activeMarker.address}
                 rating={activeMarker.rating}
                 recommended={activeMarker.recommended}
+                setModalOpen={setModalOpen}
               />
             </InfoWindow>
           )}
@@ -142,6 +144,14 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
           name={selectedPlace.name}
           address={selectedPlace.formatted_address}
           coords={selectedPlace.geometry?.location}
+          author={author}
+        />
+      )}
+      {activeMarker && (
+        <DetailView
+          modalOpen={modalOpen}
+          handleCloseModal={() => setModalOpen(false)}
+          place={activeMarker}
           author={author}
         />
       )}
