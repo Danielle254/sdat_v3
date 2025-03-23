@@ -40,7 +40,7 @@ export default function NewPlaceForm({
     name: name,
     address: address,
     coords: { lat: coords?.lat(), lng: coords?.lng() },
-    author: "",
+    author: author,
     isFavorite: false,
     dateVisited: "",
     accessIssues: false,
