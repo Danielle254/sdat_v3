@@ -32,6 +32,7 @@ export function MapContextProvider({
     signInWithPopup(auth, provider).then(async (result) => {
       if (result.user) {
         setIsLoggedIn(true);
+        setUserId(result.user.uid);
       }
     });
   }
