@@ -143,7 +143,6 @@ export default function DisplayMap({
           author={author}
           isLoggedIn={isLoggedIn}
           addPlace={addPlace}
-          resetSelectedPlace={() => setSelectedPlace(null)}
         />
       )}
       {activeMarker && (
