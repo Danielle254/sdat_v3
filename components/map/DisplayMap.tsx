@@ -147,6 +147,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
           address={selectedPlace.formatted_address}
           coords={selectedPlace.geometry?.location}
           author={author}
+          isLoggedIn={isLoggedIn}
         />
       )}
       {activeMarker && (

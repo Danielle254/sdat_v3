@@ -25,6 +25,7 @@ interface NewPlaceFormProps {
   modalOpen: boolean;
   handleCloseModal: () => void;
   author: string;
+  isLoggedIn: boolean;
 }
 
 export default function NewPlaceForm({
@@ -34,6 +35,7 @@ export default function NewPlaceForm({
   modalOpen,
   handleCloseModal,
   author,
+  isLoggedIn,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
   const [newPlaceData, setNewPlaceData] = useState<PlaceType>({
@@ -89,6 +91,19 @@ export default function NewPlaceForm({
       ...newPlaceData,
       rating: value,
     });
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <>
+        <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
+          <Typography variant="body1">
+            You must be logged in to write a review. Please use the menu in the
+            upper right corner to log in with Google.
+          </Typography>
+        </ModalBox>
+      </>
+    );
   }
   return (
     <>
