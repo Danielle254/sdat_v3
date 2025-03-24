@@ -40,6 +40,7 @@ export default function ModalBox({
           onClick={handleCloseModal}
           sx={{
             float: "right",
+            pt: 0,
           }}
         >
           <Close />

@@ -5,16 +5,20 @@ import cityState from "../../utils/cityState";
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { PlaceType } from "../../types/place";
 
 type InfoWindowContentProps = {
   type: "newPlace" | "existingPlace";
   name: string;
   address: string;
-
-  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setInfoWindowShown?: React.Dispatch<React.SetStateAction<boolean>>;
   rating?: number;
   recommended?: boolean;
+  resolveMarker?: React.Dispatch<React.SetStateAction<PlaceType>>;
+  resolvePlace?: React.Dispatch<
+    React.SetStateAction<google.maps.places.PlaceResult>
+  >;
 };
 
 export default function InfoWindowContent({
@@ -23,6 +27,8 @@ export default function InfoWindowContent({
   address,
   setModalOpen,
   setInfoWindowShown,
+  resolveMarker,
+  resolvePlace,
   rating,
   recommended,
 }: InfoWindowContentProps) {
@@ -44,6 +50,7 @@ export default function InfoWindowContent({
           onClick={() => {
             setModalOpen(true);
             setInfoWindowShown(false);
+            resolveMarker(null);
           }}
           fullWidth
         >
@@ -63,14 +70,13 @@ export default function InfoWindowContent({
           gap: 1,
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{ fontWeight: "bold" }}
-          gutterBottom={true}
-        >
+        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
           {name}
         </Typography>
-        <Rating readOnly value={rating} size="small" />
+        <Typography variant="body2" gutterBottom={true}>
+          {cityState(address)}
+        </Typography>
+        <Rating readOnly value={rating} size="medium" />
         {recommended && (
           <Chip
             icon={<ThumbUpIcon />}
@@ -80,10 +86,15 @@ export default function InfoWindowContent({
             sx={{ maxWidth: "min-content", px: 1 }}
           />
         )}
-        <Typography variant="body2" gutterBottom={true}>
-          {cityState(address)}
-        </Typography>
-        <Button variant="contained" fullWidth>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            setModalOpen(true);
+            resolvePlace(null);
+          }}
+          sx={{ mt: 2 }}
+        >
           View
         </Button>
       </Box>
