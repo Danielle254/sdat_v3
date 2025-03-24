@@ -6,8 +6,15 @@ import { MapContext } from "./context";
 import NavBar from "../../components/nav/NavBar";
 
 export default function Home() {
-  const { isLoggedIn, userId, googleLogin, handleLogout } =
-    useContext(MapContext);
+  const {
+    isLoggedIn,
+    userId,
+    googleLogin,
+    handleLogout,
+    places,
+    addPlace,
+    deletePlace,
+  } = useContext(MapContext);
 
   return (
     <div className="maps-page">
@@ -16,7 +23,13 @@ export default function Home() {
         googleLogin={googleLogin}
         handleLogout={handleLogout}
       />
-      <DisplayMap isLoggedIn={isLoggedIn} author={userId} />
+      <DisplayMap
+        isLoggedIn={isLoggedIn}
+        author={userId}
+        places={places}
+        addPlace={addPlace}
+        deletePlace={deletePlace}
+      />
     </div>
   );
 }
