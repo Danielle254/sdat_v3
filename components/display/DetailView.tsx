@@ -1,24 +1,36 @@
 import React from "react";
 import { useState } from "react";
 import ModalBox from "./ModalBox";
-import Typography from "@mui/material/Typography";
 import { PlaceType } from "../../types/place";
-import { List, ListItem, Rating, Stack } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Chip from "@mui/material/Chip";
-import BlockIcon from "@mui/icons-material/Block";
-import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
-import TableBarOutlinedIcon from "@mui/icons-material/TableBarOutlined";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import {
+  Button,
+  List,
+  ListItem,
+  Rating,
+  Stack,
+  Typography,
+  Chip,
+} from "@mui/material";
+import {
+  Delete,
+  Edit,
+  Favorite,
+  Block,
+  ErrorOutlineOutlined,
+  SupervisorAccountOutlined,
+  TableBarOutlined,
+  ThumbUp,
+  Visibility,
+  DashboardOutlined,
+} from "@mui/icons-material";
 
 type DetailViewProps = {
   modalOpen: boolean;
   handleCloseModal: () => void;
   place: PlaceType;
   author: string;
+  closeInfoWindow: () => void;
+  deletePlace: (id: string) => Promise<void>;
 };
 
 export default function DetailView({
@@ -26,10 +38,13 @@ export default function DetailView({
   handleCloseModal,
   place,
   author,
+  closeInfoWindow,
+  deletePlace,
 }: DetailViewProps) {
   const [editMode, setEditMode] = useState(false);
   const [editPlaceData, setEditPlaceData] = useState(place);
   const today = new Date().toJSON().slice(0, 10);
+
   return (
     <>
       <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
@@ -46,7 +61,7 @@ export default function DetailView({
             {place.name}
           </Typography>
           {author === place.author && place.isFavorite && (
-            <FavoriteIcon color="error" />
+            <Favorite color="error" />
           )}
         </Stack>
         <Typography variant="body1" gutterBottom>
@@ -56,7 +71,7 @@ export default function DetailView({
           <Rating readOnly value={place.rating} size="large" />
           {place.recommended && (
             <Chip
-              icon={<ThumbUpIcon />}
+              icon={<ThumbUp />}
               label="Recommended"
               color="success"
               size="small"
@@ -80,14 +95,14 @@ export default function DetailView({
         <List>
           <ListItem disableGutters>
             {place.accessIssues && (
-              <Chip label="Access Issues" icon={<BlockIcon />} color="error" />
+              <Chip label="Access Issues" icon={<Block />} color="error" />
             )}
           </ListItem>
           <ListItem disableGutters>
             {place.safetyIssues && (
               <Chip
                 label="Safety Issues"
-                icon={<ErrorOutlineOutlinedIcon />}
+                icon={<ErrorOutlineOutlined />}
                 color="error"
               />
             )}
@@ -96,7 +111,7 @@ export default function DetailView({
             {place.staffIssues && (
               <Chip
                 label="Rude or Untrained Staff"
-                icon={<SupervisorAccountOutlinedIcon />}
+                icon={<SupervisorAccountOutlined />}
                 sx={{
                   height: "auto",
                   "& .MuiChip-label": {
@@ -111,7 +126,7 @@ export default function DetailView({
             {place.floorIssues && (
               <Chip
                 label="Sticky or Hazardous Floor"
-                icon={<DashboardOutlinedIcon />}
+                icon={<DashboardOutlined />}
                 sx={{
                   height: "auto",
                   "& .MuiChip-label": {
@@ -126,7 +141,7 @@ export default function DetailView({
             {place.spaceIssues && (
               <Chip
                 label="Insufficient Space for Service Dog"
-                icon={<TableBarOutlinedIcon />}
+                icon={<TableBarOutlined />}
                 sx={{
                   height: "auto",
                   "& .MuiChip-label": {
@@ -151,9 +166,35 @@ export default function DetailView({
                 alignItems: "center",
               }}
             >
-              Private Note <VisibilityIcon fontSize="small" />
+              Private Note <Visibility fontSize="small" />
             </Typography>
             <Typography variant="body1">{place.privateNote}</Typography>
+          </>
+        )}
+        {author === place.author && (
+          <>
+            <Stack direction="row" spacing={2}>
+              <Button
+                variant="contained"
+                component="button"
+                startIcon={<Edit />}
+                onClick={() => setEditMode(true)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                component="button"
+                startIcon={<Delete />}
+                onClick={() => {
+                  deletePlace(place.id);
+                  handleCloseModal();
+                  closeInfoWindow();
+                }}
+              >
+                Delete
+              </Button>
+            </Stack>
           </>
         )}
       </ModalBox>
