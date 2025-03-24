@@ -27,7 +27,6 @@ interface NewPlaceFormProps {
     e: React.FormEvent<HTMLFormElement>,
     place: PlaceType
   ) => Promise<void>;
-  resetSelectedPlace: () => void;
 }
 
 export default function NewPlaceForm({
@@ -39,7 +38,6 @@ export default function NewPlaceForm({
   author,
   isLoggedIn,
   addPlace,
-  resetSelectedPlace,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
   let initialPlace: PlaceType = {
@@ -121,7 +119,6 @@ export default function NewPlaceForm({
             addPlace(e, newPlaceData);
             handleCloseModal();
             setNewPlaceData(initialPlace);
-            resetSelectedPlace();
           }}
         >
           <div
