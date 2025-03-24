@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   AdvancedMarker,
   APIProvider,
@@ -12,10 +12,7 @@ import {
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import React from "react";
-
 import NewPlace from "../form/NewPlace";
-import { entriesCollection } from "../../api/firebase";
-import { getDocs } from "firebase/firestore";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
@@ -23,10 +20,22 @@ import DetailView from "../display/DetailView";
 type DisplayMapProps = {
   isLoggedIn: boolean;
   author: string;
+  places: PlaceType[];
+  addPlace: (
+    e: React.FormEvent<HTMLFormElement>,
+    place: PlaceType
+  ) => Promise<void>;
+  deletePlace: (id: string) => Promise<void>;
 };
 
-export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
-  const [zoom, setZoom] = useState(5);
+export default function DisplayMap({
+  isLoggedIn,
+  author,
+  places,
+  addPlace,
+  deletePlace,
+}: DisplayMapProps) {
+  const [zoom, setZoom] = useState(4);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [selectedPlace, setSelectedPlace] =
@@ -35,21 +44,6 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
-  const [places, setPlaces] = useState<PlaceType[]>([]);
-
-  async function getData() {
-    const querySnapshot = await getDocs(entriesCollection);
-    const entriesArr: any = [];
-    querySnapshot.forEach((doc) => {
-      entriesArr.push(doc.data());
-    });
-    const convertedData: PlaceType[] = entriesArr;
-    setPlaces(convertedData);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -148,6 +142,8 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
           coords={selectedPlace.geometry?.location}
           author={author}
           isLoggedIn={isLoggedIn}
+          addPlace={addPlace}
+          resetSelectedPlace={() => setSelectedPlace(null)}
         />
       )}
       {activeMarker && (
@@ -156,6 +152,8 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
           handleCloseModal={() => setModalOpen(false)}
           place={activeMarker}
           author={author}
+          closeInfoWindow={() => setActiveMarker(null)}
+          deletePlace={deletePlace}
         />
       )}
     </APIProvider>
