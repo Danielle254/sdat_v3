@@ -12,6 +12,7 @@ import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccount
 import TableBarOutlinedIcon from "@mui/icons-material/TableBarOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 
 type DetailViewProps = {
   modalOpen: boolean;
@@ -44,11 +45,9 @@ export default function DetailView({
           >
             {place.name}
           </Typography>
-          {
-            /* author === place.author && */ place.isFavorite && (
-              <FavoriteIcon color="error" />
-            )
-          }
+          {author === place.author && place.isFavorite && (
+            <FavoriteIcon color="error" />
+          )}
         </Stack>
         <Typography variant="body1" gutterBottom>
           {place.address}
@@ -112,7 +111,7 @@ export default function DetailView({
             {place.floorIssues && (
               <Chip
                 label="Sticky or Hazardous Floor"
-                icon={<BlockIcon />}
+                icon={<DashboardOutlinedIcon />}
                 sx={{
                   height: "auto",
                   "& .MuiChip-label": {
@@ -139,26 +138,24 @@ export default function DetailView({
             )}
           </ListItem>
         </List>
-        {
-          /* author === place.author && */ place.privateNote.length > 1 && (
-            <>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontWeight: "bold",
-                  mt: 3,
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 1,
-                  alignItems: "center",
-                }}
-              >
-                Private Note <VisibilityIcon fontSize="small" />
-              </Typography>
-              <Typography variant="body1">{place.privateNote}</Typography>
-            </>
-          )
-        }
+        {author === place.author && place.privateNote.length > 1 && (
+          <>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: "bold",
+                mt: 3,
+                display: "flex",
+                flexDirection: "row",
+                gap: 1,
+                alignItems: "center",
+              }}
+            >
+              Private Note <VisibilityIcon fontSize="small" />
+            </Typography>
+            <Typography variant="body1">{place.privateNote}</Typography>
+          </>
+        )}
       </ModalBox>
     </>
   );
