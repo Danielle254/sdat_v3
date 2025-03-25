@@ -1,12 +1,13 @@
 import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import GoogleIcon from "@mui/icons-material/Google";
-import PetsIcon from "@mui/icons-material/Pets";
-import HomeIcon from "@mui/icons-material/Home";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import { Google, Pets, Home, Gavel } from "@mui/icons-material";
 import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
@@ -21,17 +22,18 @@ export default function NavLinksList() {
             component="button"
           >
             <ListItemIcon>
-              <GoogleIcon />
+              <Google />
             </ListItemIcon>
             <ListItemText
               primary={isLoggedIn ? "Logout" : "Login with Google"}
             />
           </ListItemButton>
         </ListItem>
+        <Divider />
         <ListItem disablePadding>
-          <ListItemButton href="/info">
+          <ListItemButton href="/info" component="a">
             <ListItemIcon>
-              <PetsIcon />
+              <Pets />
             </ListItemIcon>
             <ListItemText primary="About this App" />
           </ListItemButton>
@@ -39,9 +41,22 @@ export default function NavLinksList() {
         <ListItem disablePadding>
           <ListItemButton href="/">
             <ListItemIcon>
-              <HomeIcon />
+              <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        <ListItem disablePadding>
+          <ListItemButton
+            href="https://www.ada.gov/topics/service-animals/"
+            component="a"
+            target="_blank"
+          >
+            <ListItemIcon>
+              <Gavel />
+            </ListItemIcon>
+            <ListItemText primary="Service Dog Laws" />
           </ListItemButton>
         </ListItem>
       </List>
