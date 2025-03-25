@@ -132,7 +132,7 @@ export default function DisplayMap() {
         <DetailView
           modalOpen={modalOpen}
           handleCloseModal={() => setModalOpen(false)}
-          place={activeMarker}
+          placeId={activeMarker.id}
           closeInfoWindow={() => setActiveMarker(null)}
         />
       )}

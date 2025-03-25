@@ -11,18 +11,18 @@ import {
   Rating,
 } from "@mui/material";
 import { Favorite, Visibility, FavoriteBorder } from "@mui/icons-material";
-import { PlaceType } from "../../types/place";
 import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 type EditPlaceType = {
-  place: PlaceType;
+  placeId: string;
   disableEdit: () => void;
 };
 
-export default function EditPlace({ place, disableEdit }: EditPlaceType) {
+export default function EditPlace({ placeId, disableEdit }: EditPlaceType) {
   const today = new Date().toJSON().slice(0, 10);
-  const { updatePlace } = useContext(MapContext);
+  const { updatePlace, places } = useContext(MapContext);
+  const place = places.find((place) => place.id === placeId);
   const [editPlaceData, setEditPlaceData] = useState(place);
 
   function handleEditFormChange(e: React.ChangeEvent<HTMLInputElement>) {

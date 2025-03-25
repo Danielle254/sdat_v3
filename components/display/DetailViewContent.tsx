@@ -20,28 +20,24 @@ import {
   DashboardOutlined,
   TableBarOutlined,
 } from "@mui/icons-material";
-import { PlaceType } from "../../types/place";
 import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 type DetailViewContentProps = {
-  place: PlaceType;
-
+  placeId: string;
   enableEditMode: () => void;
-
   handleCloseModal: () => void;
   closeInfoWindow: () => void;
 };
 
 export default function DetailViewContent({
-  place,
-
+  placeId,
   enableEditMode,
-
   handleCloseModal,
   closeInfoWindow,
 }: DetailViewContentProps) {
-  const { userId, deletePlace } = useContext(MapContext);
+  const { userId, deletePlace, places } = useContext(MapContext);
+  const place = places.find((place) => place.id === placeId);
   return (
     <>
       <Stack

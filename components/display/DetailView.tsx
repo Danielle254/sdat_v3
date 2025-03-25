@@ -3,21 +3,18 @@ import { useState } from "react";
 import ModalBox from "./ModalBox";
 import DetailViewContent from "./DetailViewContent";
 import EditPlace from "../form/EditPlace";
-import { PlaceType } from "../../types/place";
 
 type DetailViewProps = {
   modalOpen: boolean;
   handleCloseModal: () => void;
-  place: PlaceType;
-
+  placeId: string;
   closeInfoWindow: () => void;
 };
 
 export default function DetailView({
   modalOpen,
   handleCloseModal,
-  place,
-
+  placeId,
   closeInfoWindow,
 }: DetailViewProps) {
   const [editMode, setEditMode] = useState(false);
@@ -27,14 +24,14 @@ export default function DetailView({
       <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
         {!editMode && (
           <DetailViewContent
-            place={place}
+            placeId={placeId}
             enableEditMode={() => setEditMode(true)}
             handleCloseModal={handleCloseModal}
             closeInfoWindow={closeInfoWindow}
           />
         )}
         {editMode && (
-          <EditPlace place={place} disableEdit={() => setEditMode(false)} />
+          <EditPlace placeId={placeId} disableEdit={() => setEditMode(false)} />
         )}
       </ModalBox>
     </>
