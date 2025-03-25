@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   AdvancedMarker,
   APIProvider,
@@ -12,21 +12,15 @@ import {
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import React from "react";
-
 import NewPlace from "../form/NewPlace";
-import { entriesCollection } from "../../api/firebase";
-import { getDocs } from "firebase/firestore";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
+import { useContext } from "react";
+import { MapContext } from "../../src/app/context";
 
-type DisplayMapProps = {
-  isLoggedIn: boolean;
-  author: string;
-};
-
-export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
-  const [zoom, setZoom] = useState(5);
+export default function DisplayMap() {
+  const [zoom, setZoom] = useState(4);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [selectedPlace, setSelectedPlace] =
@@ -35,21 +29,7 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
-  const [places, setPlaces] = useState<PlaceType[]>([]);
-
-  async function getData() {
-    const querySnapshot = await getDocs(entriesCollection);
-    const entriesArr: any = [];
-    querySnapshot.forEach((doc) => {
-      entriesArr.push(doc.data());
-    });
-    const convertedData: PlaceType[] = entriesArr;
-    setPlaces(convertedData);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const { places } = useContext(MapContext);
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -146,15 +126,14 @@ export default function DisplayMap({ isLoggedIn, author }: DisplayMapProps) {
           name={selectedPlace.name}
           address={selectedPlace.formatted_address}
           coords={selectedPlace.geometry?.location}
-          author={author}
         />
       )}
       {activeMarker && (
         <DetailView
           modalOpen={modalOpen}
           handleCloseModal={() => setModalOpen(false)}
-          place={activeMarker}
-          author={author}
+          placeId={activeMarker.id}
+          closeInfoWindow={() => setActiveMarker(null)}
         />
       )}
     </APIProvider>

@@ -7,18 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import GoogleIcon from "@mui/icons-material/Google";
 import PetsIcon from "@mui/icons-material/Pets";
 import HomeIcon from "@mui/icons-material/Home";
+import { useContext } from "react";
+import { MapContext } from "../../src/app/context";
 
-type NavLinksProps = {
-  isLoggedIn: boolean;
-  googleLogin: () => void;
-  handleLogout: () => void;
-};
-
-export default function NavLinksList({
-  isLoggedIn,
-  googleLogin,
-  handleLogout,
-}: NavLinksProps) {
+export default function NavLinksList() {
+  const { isLoggedIn, googleLogin, handleLogout } = useContext(MapContext);
   return (
     <>
       <List>

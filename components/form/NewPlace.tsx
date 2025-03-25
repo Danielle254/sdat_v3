@@ -1,22 +1,21 @@
-import React from "react";
-import { useState } from "react";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Rating from "@mui/material/Rating";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
-import Divider from "@mui/material/Divider";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import React, { useState } from "react";
+import {
+  Typography,
+  Checkbox,
+  TextField,
+  Button,
+  Rating,
+  FormControlLabel,
+  Switch,
+  FormGroup,
+  Divider,
+} from "@mui/material";
+import { FavoriteBorder, Favorite, Visibility } from "@mui/icons-material";
 import type { PlaceType } from "../../types/place";
-import { entriesCollection } from "../../api/firebase";
-import { addDoc } from "firebase/firestore";
 import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { MapContext } from "../../src/app/context";
 
 interface NewPlaceFormProps {
   name: string | undefined;
@@ -24,7 +23,6 @@ interface NewPlaceFormProps {
   coords: google.maps.LatLng;
   modalOpen: boolean;
   handleCloseModal: () => void;
-  author: string;
 }
 
 export default function NewPlaceForm({
@@ -33,14 +31,14 @@ export default function NewPlaceForm({
   coords,
   modalOpen,
   handleCloseModal,
-  author,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const [newPlaceData, setNewPlaceData] = useState<PlaceType>({
+  const { userId, isLoggedIn, addPlace } = useContext(MapContext);
+  let initialPlace: PlaceType = {
     name: name,
     address: address,
     coords: { lat: coords?.lat(), lng: coords?.lng() },
-    author: author,
+    author: userId,
     isFavorite: false,
     dateVisited: "",
     accessIssues: false,
@@ -53,16 +51,8 @@ export default function NewPlaceForm({
     recommended: false,
     review: "",
     id: uuidv4(),
-  });
-
-  async function addNewPlace(
-    e: React.FormEvent<HTMLFormElement>,
-    place: PlaceType
-  ) {
-    e.preventDefault();
-    const docRef = await addDoc(entriesCollection, place);
-    handleCloseModal();
-  }
+  };
+  const [newPlaceData, setNewPlaceData] = useState<PlaceType>(initialPlace);
 
   function handleFormChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.currentTarget;
@@ -90,6 +80,19 @@ export default function NewPlaceForm({
       rating: value,
     });
   }
+
+  if (!isLoggedIn) {
+    return (
+      <>
+        <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
+          <Typography variant="body1">
+            You must be logged in to write a review. Please use the menu in the
+            upper right corner to log in with Google.
+          </Typography>
+        </ModalBox>
+      </>
+    );
+  }
   return (
     <>
       <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
@@ -107,25 +110,9 @@ export default function NewPlaceForm({
         <Divider sx={{ my: 2 }} />
         <form
           onSubmit={(e) => {
-            addNewPlace(e, newPlaceData);
-            setNewPlaceData({
-              name: "",
-              address: "",
-              coords: null,
-              author: "",
-              isFavorite: false,
-              dateVisited: "",
-              accessIssues: false,
-              safetyIssues: false,
-              staffIssues: false,
-              floorIssues: false,
-              spaceIssues: false,
-              privateNote: "",
-              rating: null,
-              recommended: false,
-              review: "",
-              id: "",
-            });
+            addPlace(e, newPlaceData);
+            handleCloseModal();
+            setNewPlaceData(initialPlace);
           }}
         >
           <div
@@ -225,7 +212,7 @@ export default function NewPlaceForm({
               gap: 1,
             }}
           >
-            For You <VisibilityIcon fontSize="small" />
+            For You <Visibility fontSize="small" />
           </Typography>
           <Typography variant="body2" gutterBottom={true}>
             These details are visible only to you.
