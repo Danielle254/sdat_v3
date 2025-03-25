@@ -16,25 +16,10 @@ import NewPlace from "../form/NewPlace";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
+import { useContext } from "react";
+import { MapContext } from "../../src/app/context";
 
-type DisplayMapProps = {
-  isLoggedIn: boolean;
-  author: string;
-  places: PlaceType[];
-  addPlace: (
-    e: React.FormEvent<HTMLFormElement>,
-    place: PlaceType
-  ) => Promise<void>;
-  deletePlace: (id: string) => Promise<void>;
-};
-
-export default function DisplayMap({
-  isLoggedIn,
-  author,
-  places,
-  addPlace,
-  deletePlace,
-}: DisplayMapProps) {
+export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
   const [position, setPosition] = useState({ lat: 40, lng: -97 });
   const [markerRef, marker] = useAdvancedMarkerRef();
@@ -44,6 +29,7 @@ export default function DisplayMap({
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
+  const { places } = useContext(MapContext);
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -140,9 +126,6 @@ export default function DisplayMap({
           name={selectedPlace.name}
           address={selectedPlace.formatted_address}
           coords={selectedPlace.geometry?.location}
-          author={author}
-          isLoggedIn={isLoggedIn}
-          addPlace={addPlace}
         />
       )}
       {activeMarker && (
@@ -150,9 +133,7 @@ export default function DisplayMap({
           modalOpen={modalOpen}
           handleCloseModal={() => setModalOpen(false)}
           place={activeMarker}
-          author={author}
           closeInfoWindow={() => setActiveMarker(null)}
-          deletePlace={deletePlace}
         />
       )}
     </APIProvider>

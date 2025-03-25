@@ -14,6 +14,8 @@ import { FavoriteBorder, Favorite, Visibility } from "@mui/icons-material";
 import type { PlaceType } from "../../types/place";
 import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { MapContext } from "../../src/app/context";
 
 interface NewPlaceFormProps {
   name: string | undefined;
@@ -21,12 +23,6 @@ interface NewPlaceFormProps {
   coords: google.maps.LatLng;
   modalOpen: boolean;
   handleCloseModal: () => void;
-  author: string;
-  isLoggedIn: boolean;
-  addPlace: (
-    e: React.FormEvent<HTMLFormElement>,
-    place: PlaceType
-  ) => Promise<void>;
 }
 
 export default function NewPlaceForm({
@@ -35,16 +31,14 @@ export default function NewPlaceForm({
   coords,
   modalOpen,
   handleCloseModal,
-  author,
-  isLoggedIn,
-  addPlace,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
+  const { userId, isLoggedIn, addPlace } = useContext(MapContext);
   let initialPlace: PlaceType = {
     name: name,
     address: address,
     coords: { lat: coords?.lat(), lng: coords?.lng() },
-    author: author,
+    author: userId,
     isFavorite: false,
     dateVisited: "",
     accessIssues: false,

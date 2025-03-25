@@ -27,10 +27,10 @@ export default function InfoWindowContent({
   address,
   setModalOpen,
   setInfoWindowShown,
-  resolveMarker,
-  resolvePlace,
   rating,
   recommended,
+  resolveMarker,
+  resolvePlace,
 }: InfoWindowContentProps) {
   if (type === "newPlace") {
     return (

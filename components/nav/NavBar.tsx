@@ -15,17 +15,7 @@ import NavLinksList from "./NavLinksList";
 import Divider from "@mui/material/Divider";
 import Link from "next/link";
 
-type NavBarProps = {
-  isLoggedIn: boolean;
-  googleLogin: () => void;
-  handleLogout: () => void;
-};
-
-export default function NavBar({
-  isLoggedIn,
-  googleLogin,
-  handleLogout,
-}: NavBarProps) {
+export default function NavBar() {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -92,11 +82,7 @@ export default function NavBar({
                 <ChevronRightIcon />
               </IconButton>
               <Divider />
-              <NavLinksList
-                isLoggedIn={isLoggedIn}
-                googleLogin={googleLogin}
-                handleLogout={handleLogout}
-              />
+              <NavLinksList />
             </Box>
           </Drawer>
         </Toolbar>

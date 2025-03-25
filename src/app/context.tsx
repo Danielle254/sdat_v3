@@ -3,7 +3,7 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
+import { onSnapshot, doc, setDoc, deleteDoc } from "firebase/firestore";
 import { auth, entriesCollection } from "../../api/firebase";
 import type { PlaceType } from "../../types/place";
 
@@ -18,6 +18,7 @@ type MapContextType = {
     place: PlaceType
   ) => Promise<void>;
   deletePlace: (id: string) => Promise<void>;
+  updatePlace: (updatedPlace: PlaceType) => Promise<void>;
 };
 
 export const MapContext = createContext<MapContextType>({
@@ -28,6 +29,7 @@ export const MapContext = createContext<MapContextType>({
   places: [],
   addPlace: () => new Promise(() => {}),
   deletePlace: () => new Promise(() => {}),
+  updatePlace: () => new Promise(() => {}),
 });
 
 export function MapContextProvider({
@@ -63,35 +65,52 @@ export function MapContextProvider({
     setIsLoggedIn(false);
   }
 
-  async function getData() {
-    const querySnapshot = await getDocs(entriesCollection);
-    const entriesArr: any = [];
-    querySnapshot.forEach((doc) => {
-      entriesArr.push(doc.data());
-    });
-    const convertedData: PlaceType[] = entriesArr;
-    setPlaces(convertedData);
-  }
-
   async function addPlace(
     e: React.FormEvent<HTMLFormElement>,
     place: PlaceType
   ) {
     e.preventDefault();
     const docRef = await setDoc(doc(entriesCollection, place.id), place);
-    setPlaces([...places, place]);
   }
 
   async function deletePlace(id: string) {
     const docRef = doc(entriesCollection, id);
     await deleteDoc(docRef);
-    const newPlaces = places.filter((place) => place.id !== id);
-    setPlaces(newPlaces);
+  }
+
+  async function updatePlace(editedPlace: PlaceType) {
+    let cleanPlace = editedPlace;
+    const docRef = doc(entriesCollection, cleanPlace.id);
+    await setDoc(docRef, cleanPlace);
   }
 
   useEffect(() => {
     checkIsLoggedIn();
-    getData();
+    const unsubscribe = onSnapshot(entriesCollection, function (snapshot) {
+      const entriesArr = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          name: data.name,
+          address: data.address,
+          coords: data.coords,
+          author: data.author,
+          isFavorite: data.isFavorite,
+          dateVisited: data.dateVisited,
+          accessIssues: data.accessIssues,
+          safetyIssues: data.safetyIssues,
+          staffIssues: data.staffIssues,
+          floorIssues: data.floorIssues,
+          spaceIssues: data.spaceIssues,
+          privateNote: data.privateNote,
+          rating: data.rating,
+          recommended: data.recommended,
+          review: data.review,
+          id: data.id,
+        };
+      });
+      setPlaces(entriesArr);
+    });
+    return unsubscribe;
   }, []);
 
   return (
@@ -104,6 +123,7 @@ export function MapContextProvider({
         places,
         addPlace,
         deletePlace,
+        updatePlace,
       }}
     >
       {children}
