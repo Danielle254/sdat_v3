@@ -5,7 +5,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from "@mui/material";
 import { Google, Pets, Home, Gavel } from "@mui/icons-material";
 import { useContext } from "react";
@@ -20,6 +19,7 @@ export default function NavLinksList() {
           <ListItemButton
             onClick={isLoggedIn ? handleLogout : googleLogin}
             component="button"
+            divider
           >
             <ListItemIcon>
               <Google />
@@ -29,7 +29,6 @@ export default function NavLinksList() {
             />
           </ListItemButton>
         </ListItem>
-        <Divider />
         <ListItem disablePadding>
           <ListItemButton href="/info" component="a">
             <ListItemIcon>
@@ -39,14 +38,13 @@ export default function NavLinksList() {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton href="/">
+          <ListItemButton href="/" divider>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
-        <Divider />
         <ListItem disablePadding>
           <ListItemButton
             href="https://www.ada.gov/topics/service-animals/"
