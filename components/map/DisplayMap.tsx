@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import {
   AdvancedMarker,
   APIProvider,
@@ -11,12 +11,10 @@ import {
 } from "@vis.gl/react-google-maps";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
-import React from "react";
 import NewPlace from "../form/NewPlace";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
-import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 export default function DisplayMap() {

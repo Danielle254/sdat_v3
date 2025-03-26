@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Typography,
   Divider,
@@ -11,7 +11,6 @@ import {
   Rating,
 } from "@mui/material";
 import { Favorite, Visibility, FavoriteBorder } from "@mui/icons-material";
-import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 type EditPlaceType = {

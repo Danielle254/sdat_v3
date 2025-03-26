@@ -1,9 +1,6 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Box, Button, Typography, Rating, Chip } from "@mui/material";
 import cityState from "../../utils/cityState";
-import Rating from "@mui/material/Rating";
-import Chip from "@mui/material/Chip";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { PlaceType } from "../../types/place";
 

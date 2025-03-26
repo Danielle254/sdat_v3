@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Stack,
   Typography,
@@ -20,7 +20,6 @@ import {
   DashboardOutlined,
   TableBarOutlined,
 } from "@mui/icons-material";
-import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 type DetailViewContentProps = {

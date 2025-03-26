@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Typography,
   Checkbox,
@@ -14,7 +14,6 @@ import { FavoriteBorder, Favorite, Visibility } from "@mui/icons-material";
 import type { PlaceType } from "../../types/place";
 import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
-import { useContext } from "react";
 import { MapContext } from "../../src/app/context";
 
 interface NewPlaceFormProps {

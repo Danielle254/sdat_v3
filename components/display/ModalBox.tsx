@@ -1,8 +1,5 @@
 import React from "react";
-import Modal from "@mui/material/Modal";
-import NewPlaceForm from "../form/NewPlace";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
+import { Modal, Box, IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 type ModalBoxProps = {
