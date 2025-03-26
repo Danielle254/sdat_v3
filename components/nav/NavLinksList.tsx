@@ -23,29 +23,34 @@ export default function NavLinksList() {
             variant="contained"
             color="info"
             startIcon={<Google />}
-            sx={{ ml: 2, borderRadius: "20px", mb: 2 }}
+            sx={{
+              ml: 2,
+              borderRadius: "20px",
+              mb: 2,
+              px: 2,
+            }}
           >
             {isLoggedIn ? "Logout" : "Login with Google"}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton href="/">
             <ListItemIcon>
               <Home />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Home" sx={{ ml: -1 }} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton href="/info" component="a" divider>
             <ListItemIcon>
               <Pets />
             </ListItemIcon>
-            <ListItemText primary="About this App" />
+            <ListItemText primary="About this App" sx={{ ml: -1 }} />
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton
             href="https://www.ada.gov/topics/service-animals/"
             component="a"
@@ -54,7 +59,7 @@ export default function NavLinksList() {
             <ListItemIcon>
               <Gavel />
             </ListItemIcon>
-            <ListItemText primary="Service Dog Laws" />
+            <ListItemText primary="Service Dog Laws" sx={{ ml: -1 }} />
           </ListItemButton>
         </ListItem>
       </List>
