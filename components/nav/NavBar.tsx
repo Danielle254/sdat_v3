@@ -12,7 +12,7 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NavLinksList from "./NavLinksList";
-import Divider from "@mui/material/Divider";
+
 import Link from "next/link";
 
 export default function NavBar() {
@@ -81,7 +81,7 @@ export default function NavBar() {
               >
                 <ChevronRightIcon />
               </IconButton>
-              <Divider />
+
               <NavLinksList />
             </Box>
           </Drawer>

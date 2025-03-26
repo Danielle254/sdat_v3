@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Button,
   List,
   ListItem,
   ListItemButton,
@@ -16,35 +17,34 @@ export default function NavLinksList() {
     <>
       <List>
         <ListItem disablePadding>
-          <ListItemButton
+          <Button
             onClick={isLoggedIn ? handleLogout : googleLogin}
             component="button"
-            divider
+            variant="contained"
+            color="info"
+            startIcon={<Google />}
+            sx={{ ml: 2, borderRadius: "20px", mb: 2 }}
           >
-            <ListItemIcon>
-              <Google />
-            </ListItemIcon>
-            <ListItemText
-              primary={isLoggedIn ? "Logout" : "Login with Google"}
-            />
-          </ListItemButton>
+            {isLoggedIn ? "Logout" : "Login with Google"}
+          </Button>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton href="/info" component="a">
-            <ListItemIcon>
-              <Pets />
-            </ListItemIcon>
-            <ListItemText primary="About this App" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton href="/" divider>
+          <ListItemButton href="/">
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
         </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton href="/info" component="a" divider>
+            <ListItemIcon>
+              <Pets />
+            </ListItemIcon>
+            <ListItemText primary="About this App" />
+          </ListItemButton>
+        </ListItem>
+
         <ListItem disablePadding>
           <ListItemButton
             href="https://www.ada.gov/topics/service-animals/"
