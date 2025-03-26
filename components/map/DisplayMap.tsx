@@ -16,6 +16,8 @@ import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
 import { MapContext } from "../../src/app/context";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { IconButton } from "@mui/material";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
@@ -31,6 +33,20 @@ export default function DisplayMap() {
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
+  }
+
+  function centerMapUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          setZoom(12);
+        },
+        () => alert("Unable to retrieve your location")
+      );
+    } else {
+      alert("Geolocation is not supported by your browser");
+    }
   }
 
   return (
@@ -54,6 +70,27 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
+          <IconButton
+            onClick={centerMapUserLocation}
+            component="button"
+            size="large"
+            sx={{
+              position: "absolute",
+              bottom: "30px",
+              left: "70px",
+              zIndex: 4,
+              bgcolor: "#FFF",
+              borderRadius: "0",
+              "&:hover": {
+                bgcolor: "#FFF",
+                borderColor: "gray",
+                border: 1,
+                color: "#000",
+              },
+            }}
+          >
+            <MyLocationIcon />
+          </IconButton>
           <AdvancedMarker
             ref={markerRef}
             position={null}
