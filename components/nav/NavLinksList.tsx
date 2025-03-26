@@ -49,7 +49,6 @@ export default function NavLinksList() {
             <ListItemText primary="About this App" sx={{ ml: -1 }} />
           </ListItemButton>
         </ListItem>
-
         <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton
             href="https://www.ada.gov/topics/service-animals/"
