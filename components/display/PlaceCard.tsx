@@ -53,6 +53,11 @@ export default function PlaceCard({
           width: "1",
           boxShadow: 1,
         }}
+        onClick={() => {
+          setModalOpen(true);
+          resolvePlace(null);
+          setMarker(id);
+        }}
       >
         <Box
           sx={{
@@ -60,6 +65,7 @@ export default function PlaceCard({
             flexDirection: "row",
             gap: 1,
             flexWrap: "nowrap",
+            cursor: "pointer",
           }}
         >
           <Typography variant="body1" sx={{ fontWeight: "bold" }}>
@@ -82,20 +88,6 @@ export default function PlaceCard({
             sx={{ maxWidth: "min-content", px: 1, mt: 1 }}
           />
         )}
-        <Button
-          variant="contained"
-          component="button"
-          size="small"
-          fullWidth
-          onClick={() => {
-            setModalOpen(true);
-            resolvePlace(null);
-            setMarker(id);
-          }}
-          sx={{ mt: 2 }}
-        >
-          View
-        </Button>
       </Box>
     </>
   );
