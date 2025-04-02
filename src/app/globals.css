@@ -27,7 +27,7 @@ body {
 }
 
 .listview {
-  height: calc(100vh - 140px);
+  height: calc(100vh - 190px);
 }
 
 @media screen and (max-width: 350px) {
