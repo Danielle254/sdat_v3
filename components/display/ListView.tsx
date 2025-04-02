@@ -34,8 +34,8 @@ export default function ListView({
           border: 1,
           borderColor: "lightgray",
           overflowY: "scroll",
-          maxHeight: "500px",
         }}
+        className="listview"
       >
         <IconButton onClick={closeListView}>
           <ChevronRight />
