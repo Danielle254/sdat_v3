@@ -76,7 +76,7 @@ export default function ListView({
               flexDirection: "row",
               alignItems: "center",
               gap: 2,
-              width: "180px",
+              mr: 2,
             }}
           >
             <Typography
@@ -96,6 +96,7 @@ export default function ListView({
               label="Filter:"
               onChange={handleChange}
               labelId="filter-label"
+              sx={{ width: "110px" }}
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"myPlaces"}>My Places</MenuItem>
