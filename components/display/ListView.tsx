@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, List, ListItem } from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 
 import { MapContext } from "../../src/app/context";
 import PlaceCard from "./PlaceCard";
@@ -20,7 +20,7 @@ export default function ListView({
   setMarker,
   filter,
 }: ListViewProps) {
-  const { userId, places } = useContext(MapContext);
+  const { userId, places, isLoggedIn } = useContext(MapContext);
 
   return (
     <>
@@ -39,13 +39,17 @@ export default function ListView({
         }}
         className="listview"
       >
+        {filter !== "all" && !isLoggedIn && (
+          <Typography variant="body1" sx={{ m: 2 }}>
+            Please log in to capture your own entries and favorites!
+          </Typography>
+        )}
         <List>
           {filter === "all" &&
             places.map((place) => {
               return (
-                <ListItem>
+                <ListItem key={place.id}>
                   <PlaceCard
-                    key={place.id}
                     name={place.name}
                     address={place.address}
                     rating={place.rating}
@@ -66,9 +70,8 @@ export default function ListView({
               .filter((place) => place.author === userId)
               .map((place) => {
                 return (
-                  <ListItem>
+                  <ListItem key={place.id}>
                     <PlaceCard
-                      key={place.id}
                       name={place.name}
                       address={place.address}
                       rating={place.rating}
@@ -89,9 +92,8 @@ export default function ListView({
               .filter((place) => place.author === userId && place.isFavorite)
               .map((place) => {
                 return (
-                  <ListItem>
+                  <ListItem key={place.id}>
                     <PlaceCard
-                      key={place.id}
                       name={place.name}
                       address={place.address}
                       rating={place.rating}
