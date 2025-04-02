@@ -52,6 +52,7 @@ export default function PlaceCard({
           p: 1,
           width: "1",
           boxShadow: 1,
+          cursor: "pointer",
         }}
         onClick={() => {
           setModalOpen(true);
@@ -65,7 +66,6 @@ export default function PlaceCard({
             flexDirection: "row",
             gap: 1,
             flexWrap: "nowrap",
-            cursor: "pointer",
           }}
         >
           <Typography variant="body1" sx={{ fontWeight: "bold" }}>
