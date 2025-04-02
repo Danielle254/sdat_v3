@@ -18,14 +18,7 @@ import DetailView from "../display/DetailView";
 import ListView from "../display/ListView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import {
-  IconButton,
-  Button,
-  FormControl,
-  Box,
-  Typography,
-  MenuItem,
-} from "@mui/material";
+import { IconButton, Button, FormControl, Box, MenuItem } from "@mui/material";
 import { FilterAltOutlined, FormatListBulleted } from "@mui/icons-material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import type { Filter } from "../../types/otherTypes";
@@ -40,7 +33,7 @@ export default function DisplayMap() {
   const [infoWindowShown, setInfoWindowShown] = useState(true);
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
-  const { places } = useContext(MapContext);
+  const { places, userId } = useContext(MapContext);
   const [listViewOpen, setListViewOpen] = useState(false);
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -204,21 +197,58 @@ export default function DisplayMap() {
               />
             </InfoWindow>
           )}
-          {places.map((place) => (
-            <AdvancedMarker
-              position={place.coords}
-              key={place.id}
-              clickable={true}
-              onClick={() => handleActiveMarker(place.id)}
-            >
-              <Pin
-                background={"#0E1B41"}
-                borderColor={"#0E1B41"}
-                glyphColor={"#53cbe2"}
-                scale={1.2}
-              />
-            </AdvancedMarker>
-          ))}
+          {filter === "all" &&
+            places.map((place) => (
+              <AdvancedMarker
+                position={place.coords}
+                key={place.id}
+                clickable={true}
+                onClick={() => handleActiveMarker(place.id)}
+              >
+                <Pin
+                  background={"#0E1B41"}
+                  borderColor={"#0E1B41"}
+                  glyphColor={"#53cbe2"}
+                  scale={1.2}
+                />
+              </AdvancedMarker>
+            ))}
+          {filter === "myPlaces" &&
+            places
+              .filter((place) => userId === place.author)
+              .map((place) => (
+                <AdvancedMarker
+                  position={place.coords}
+                  key={place.id}
+                  clickable={true}
+                  onClick={() => handleActiveMarker(place.id)}
+                >
+                  <Pin
+                    background={"#0E1B41"}
+                    borderColor={"#0E1B41"}
+                    glyphColor={"#53cbe2"}
+                    scale={1.2}
+                  />
+                </AdvancedMarker>
+              ))}
+          {filter === "favorites" &&
+            places
+              .filter((place) => userId === place.author && place.isFavorite)
+              .map((place) => (
+                <AdvancedMarker
+                  position={place.coords}
+                  key={place.id}
+                  clickable={true}
+                  onClick={() => handleActiveMarker(place.id)}
+                >
+                  <Pin
+                    background={"#0E1B41"}
+                    borderColor={"#0E1B41"}
+                    glyphColor={"#53cbe2"}
+                    scale={1.2}
+                  />
+                </AdvancedMarker>
+              ))}
           {activeMarker && (
             <InfoWindow
               position={activeMarker.coords}
