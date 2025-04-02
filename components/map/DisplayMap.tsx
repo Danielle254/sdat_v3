@@ -160,14 +160,13 @@ export default function DisplayMap() {
           >
             <MyLocationIcon />
           </IconButton>
-          {listViewOpen && (
-            <ListView
-              setModalOpen={setModalOpen}
-              resolvePlace={setSelectedPlace}
-              setMarker={handleActiveMarker}
-              filter={filter}
-            />
-          )}
+          <ListView
+            setModalOpen={setModalOpen}
+            resolvePlace={setSelectedPlace}
+            setMarker={handleActiveMarker}
+            filter={filter}
+            listViewOpen={listViewOpen}
+          />
           <AdvancedMarker
             ref={markerRef}
             position={null}

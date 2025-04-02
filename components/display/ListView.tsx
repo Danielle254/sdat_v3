@@ -12,6 +12,7 @@ type ListViewProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setMarker: (input: string) => void;
   filter: Filter;
+  listViewOpen: boolean;
 };
 
 export default function ListView({
@@ -19,6 +20,7 @@ export default function ListView({
   resolvePlace,
   setMarker,
   filter,
+  listViewOpen,
 }: ListViewProps) {
   const { userId, places, isLoggedIn } = useContext(MapContext);
 
@@ -26,18 +28,14 @@ export default function ListView({
     <>
       <Box
         sx={{
-          position: "absolute",
-          width: "300px",
-          top: "100px",
           zIndex: 10,
-          right: "10px",
           bgcolor: "white",
           borderRadius: "5px",
           border: 1,
           borderColor: "lightgray",
           overflowY: "scroll",
         }}
-        className="listview"
+        className={listViewOpen ? "listview open" : "listview"}
       >
         {filter !== "all" && !isLoggedIn && (
           <Typography variant="body1" sx={{ m: 2 }}>
