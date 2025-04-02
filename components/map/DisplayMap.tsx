@@ -15,6 +15,7 @@ import NewPlace from "../form/NewPlace";
 import type { PlaceType } from "../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
+import ListView from "../display/ListView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { IconButton, Button, Stack } from "@mui/material";
@@ -34,6 +35,7 @@ export default function DisplayMap() {
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
   const { places } = useContext(MapContext);
+  const [listViewOpen, setListViewOpen] = useState(true);
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -90,6 +92,7 @@ export default function DisplayMap() {
                 color: "#000",
                 fontSize: "12px",
               }}
+              onClick={() => setListViewOpen(true)}
             >
               Favorites
             </Button>
@@ -104,6 +107,7 @@ export default function DisplayMap() {
                 color: "#000",
                 fontSize: "12px",
               }}
+              onClick={() => setListViewOpen(true)}
             >
               List View
             </Button>
@@ -129,6 +133,14 @@ export default function DisplayMap() {
           >
             <MyLocationIcon />
           </IconButton>
+          {listViewOpen && (
+            <ListView
+              setModalOpen={setModalOpen}
+              resolvePlace={setSelectedPlace}
+              closeListView={() => setListViewOpen(false)}
+              setMarker={handleActiveMarker}
+            />
+          )}
           <AdvancedMarker
             ref={markerRef}
             position={null}
