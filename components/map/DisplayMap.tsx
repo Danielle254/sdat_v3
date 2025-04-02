@@ -17,7 +17,11 @@ import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import { IconButton } from "@mui/material";
+import { IconButton, Button, Stack } from "@mui/material";
+import {
+  FavoriteBorderOutlined,
+  FormatListBulleted,
+} from "@mui/icons-material";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
@@ -70,6 +74,40 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ position: "absolute", top: "56px", right: "78px" }}
+          >
+            <Button
+              variant="outlined"
+              component="button"
+              size="small"
+              startIcon={<FavoriteBorderOutlined />}
+              sx={{
+                borderRadius: "15px",
+                bgcolor: "lightgray",
+                color: "#000",
+                fontSize: "12px",
+              }}
+            >
+              Favorites
+            </Button>
+            <Button
+              variant="outlined"
+              component="button"
+              size="small"
+              startIcon={<FormatListBulleted />}
+              sx={{
+                borderRadius: "15px",
+                bgcolor: "lightgray",
+                color: "#000",
+                fontSize: "12px",
+              }}
+            >
+              List View
+            </Button>
+          </Stack>
           <IconButton
             onClick={centerMapUserLocation}
             component="button"
