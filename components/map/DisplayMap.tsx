@@ -18,11 +18,17 @@ import DetailView from "../display/DetailView";
 import ListView from "../display/ListView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import { IconButton, Button, Stack } from "@mui/material";
 import {
-  FavoriteBorderOutlined,
-  FormatListBulleted,
-} from "@mui/icons-material";
+  IconButton,
+  Button,
+  FormControl,
+  Box,
+  Typography,
+  MenuItem,
+} from "@mui/material";
+import { FilterAltOutlined, FormatListBulleted } from "@mui/icons-material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import type { Filter } from "../../types/otherTypes";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
@@ -36,6 +42,11 @@ export default function DisplayMap() {
   const [modalOpen, setModalOpen] = useState(false);
   const { places } = useContext(MapContext);
   const [listViewOpen, setListViewOpen] = useState(false);
+  const [filter, setFilter] = useState<Filter>("all");
+
+  function handleFilter(event: SelectChangeEvent) {
+    setFilter(event.target.value as Filter);
+  }
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -76,25 +87,65 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
-          <Button
-            variant="outlined"
-            component="button"
-            size="small"
-            startIcon={<FormatListBulleted />}
+          <Box
             sx={{
-              borderRadius: "15px",
-              bgcolor: "lightgray",
-              color: "#000",
-              fontSize: "12px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
               position: "absolute",
               top: "56px",
-              right: "10px",
+              right: "12px",
+              width: "294px",
             }}
-            onClick={() => setListViewOpen(true)}
           >
-            List View
-          </Button>
-
+            <FormControl
+              variant="standard"
+              size="small"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "flex-start",
+                gap: 1,
+                mr: 2,
+                bgcolor: "lightgray",
+                borderRadius: "15px",
+                borderColor: "gray",
+                border: 1,
+                px: 1,
+              }}
+            >
+              <FilterAltOutlined fontSize="small" sx={{ mt: "2px" }} />
+              <Select
+                id="filter"
+                value={filter}
+                onChange={handleFilter}
+                labelId="filter-label"
+                sx={{ width: "110px" }}
+                disableUnderline
+              >
+                <MenuItem value={"all"}>All</MenuItem>
+                <MenuItem value={"myPlaces"}>My Places</MenuItem>
+                <MenuItem value={"favorites"}>Favorites</MenuItem>
+              </Select>
+            </FormControl>
+            <Button
+              component="button"
+              size="small"
+              startIcon={<FormatListBulleted />}
+              sx={{
+                borderRadius: "15px",
+                bgcolor: "lightgray",
+                color: "#000",
+                fontSize: "12px",
+                borderColor: "gray",
+                border: 1,
+                px: 1,
+              }}
+              onClick={() => setListViewOpen(!listViewOpen)}
+            >
+              List View
+            </Button>
+          </Box>
           <IconButton
             onClick={centerMapUserLocation}
             component="button"
@@ -120,8 +171,8 @@ export default function DisplayMap() {
             <ListView
               setModalOpen={setModalOpen}
               resolvePlace={setSelectedPlace}
-              closeListView={() => setListViewOpen(false)}
               setMarker={handleActiveMarker}
+              filter={filter}
             />
           )}
           <AdvancedMarker
