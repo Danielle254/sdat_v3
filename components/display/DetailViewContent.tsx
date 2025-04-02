@@ -84,22 +84,22 @@ export default function DetailViewContent({
           </Typography>
         )}
       <List>
-        <ListItem disableGutters>
-          {place.accessIssues && (
+        {place.accessIssues && (
+          <ListItem disableGutters>
             <Chip label="Access Issues" icon={<Block />} color="error" />
-          )}
-        </ListItem>
-        <ListItem disableGutters>
-          {place.safetyIssues && (
+          </ListItem>
+        )}
+        {place.safetyIssues && (
+          <ListItem disableGutters>
             <Chip
               label="Safety Issues"
               icon={<ErrorOutlineOutlined />}
               color="error"
             />
-          )}
-        </ListItem>
-        <ListItem disableGutters>
-          {place.staffIssues && (
+          </ListItem>
+        )}
+        {place.staffIssues && (
+          <ListItem disableGutters>
             <Chip
               label="Rude or Untrained Staff"
               icon={<SupervisorAccountOutlined />}
@@ -111,10 +111,10 @@ export default function DetailViewContent({
                 },
               }}
             />
-          )}
-        </ListItem>
-        <ListItem disableGutters>
-          {place.floorIssues && (
+          </ListItem>
+        )}
+        {place.floorIssues && (
+          <ListItem disableGutters>
             <Chip
               label="Sticky or Hazardous Floor"
               icon={<DashboardOutlined />}
@@ -126,10 +126,10 @@ export default function DetailViewContent({
                 },
               }}
             />
-          )}
-        </ListItem>
-        <ListItem disableGutters>
-          {place.spaceIssues && (
+          </ListItem>
+        )}
+        {place.spaceIssues && (
+          <ListItem disableGutters>
             <Chip
               label="Insufficient Space for Service Dog"
               icon={<TableBarOutlined />}
@@ -141,8 +141,8 @@ export default function DetailViewContent({
                 },
               }}
             />
-          )}
-        </ListItem>
+          </ListItem>
+        )}
       </List>
       {userId === place.author && place.privateNote.length > 1 && (
         <>
