@@ -35,7 +35,7 @@ export default function DisplayMap() {
   const handleClose = useCallback(() => setInfoWindowShown(false), []);
   const [modalOpen, setModalOpen] = useState(false);
   const { places } = useContext(MapContext);
-  const [listViewOpen, setListViewOpen] = useState(true);
+  const [listViewOpen, setListViewOpen] = useState(false);
 
   function handleActiveMarker(id: string) {
     setActiveMarker(places[places.findIndex((each) => each.id === id)]);
@@ -76,42 +76,25 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{ position: "absolute", top: "56px", right: "78px" }}
+          <Button
+            variant="outlined"
+            component="button"
+            size="small"
+            startIcon={<FormatListBulleted />}
+            sx={{
+              borderRadius: "15px",
+              bgcolor: "lightgray",
+              color: "#000",
+              fontSize: "12px",
+              position: "absolute",
+              top: "56px",
+              right: "10px",
+            }}
+            onClick={() => setListViewOpen(true)}
           >
-            <Button
-              variant="outlined"
-              component="button"
-              size="small"
-              startIcon={<FavoriteBorderOutlined />}
-              sx={{
-                borderRadius: "15px",
-                bgcolor: "lightgray",
-                color: "#000",
-                fontSize: "12px",
-              }}
-              onClick={() => setListViewOpen(true)}
-            >
-              Favorites
-            </Button>
-            <Button
-              variant="outlined"
-              component="button"
-              size="small"
-              startIcon={<FormatListBulleted />}
-              sx={{
-                borderRadius: "15px",
-                bgcolor: "lightgray",
-                color: "#000",
-                fontSize: "12px",
-              }}
-              onClick={() => setListViewOpen(true)}
-            >
-              List View
-            </Button>
-          </Stack>
+            List View
+          </Button>
+
           <IconButton
             onClick={centerMapUserLocation}
             component="button"
