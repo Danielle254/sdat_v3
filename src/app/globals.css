@@ -12,6 +12,8 @@ body {
 
 .map-container {
   height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .autocomplete {
@@ -24,6 +26,30 @@ body {
   padding: 8px 4px 8px 6px;
   width: 40ch;
   border: 2px solid gray;
+}
+
+.listview {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 300px;
+  opacity: 0;
+  height: calc(100vh - 190px);
+  translate: 25vw 0;
+  transition-property: display opacity;
+  transition-duration: 0.3s;
+  transition-behavior: allow-discrete;
+}
+
+.open {
+  display: block;
+  translate: 0 0;
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+    translate: 25vw 0;
+  }
 }
 
 @media screen and (max-width: 350px) {
