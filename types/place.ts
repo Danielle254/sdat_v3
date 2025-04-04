@@ -3,6 +3,7 @@ export interface PlaceType {
   address: string | undefined;
   coords: Coords;
   author: string;
+  authorName: string;
   isFavorite: boolean;
   dateVisited: string;
   accessIssues: boolean;
