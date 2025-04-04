@@ -32,12 +32,13 @@ export default function NewPlaceForm({
   handleCloseModal,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const { userId, isLoggedIn, addPlace } = useContext(MapContext);
+  const { userId, userName, isLoggedIn, addPlace } = useContext(MapContext);
   let initialPlace: PlaceType = {
     name: name,
     address: address,
     coords: { lat: coords?.lat(), lng: coords?.lng() },
     author: userId,
+    authorName: userName,
     isFavorite: false,
     dateVisited: "",
     accessIssues: false,

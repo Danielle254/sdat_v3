@@ -10,6 +10,7 @@ import type { PlaceType } from "../../types/place";
 type MapContextType = {
   isLoggedIn: boolean;
   userId: string;
+  userName: string;
   googleLogin: () => void;
   handleLogout: () => void;
   places: PlaceType[];
@@ -24,6 +25,7 @@ type MapContextType = {
 export const MapContext = createContext<MapContextType>({
   isLoggedIn: false,
   userId: "",
+  userName: "",
   googleLogin: () => {},
   handleLogout: () => {},
   places: [],
@@ -38,7 +40,8 @@ export function MapContextProvider({
   children: React.ReactNode;
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
   const [places, setPlaces] = useState<PlaceType[]>([]);
 
   function googleLogin() {
@@ -47,6 +50,7 @@ export function MapContextProvider({
       if (result.user) {
         setIsLoggedIn(true);
         setUserId(result.user.uid);
+        setUserName(result.user.displayName);
       }
     });
   }
@@ -56,6 +60,7 @@ export function MapContextProvider({
       if (user) {
         setIsLoggedIn(true);
         setUserId(user.uid);
+        setUserName(user.displayName);
       }
     });
   }
@@ -94,6 +99,7 @@ export function MapContextProvider({
           address: data.address,
           coords: data.coords,
           author: data.author,
+          authorName: data.authorName,
           isFavorite: data.isFavorite,
           dateVisited: data.dateVisited,
           accessIssues: data.accessIssues,
@@ -118,6 +124,7 @@ export function MapContextProvider({
       value={{
         isLoggedIn,
         userId,
+        userName,
         googleLogin,
         handleLogout,
         places,
