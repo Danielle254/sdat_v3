@@ -73,10 +73,10 @@ export default function DetailViewContent({
           />
         )}
       </Stack>
-      <Typography variant="body1">{place.review}</Typography>
-      <Typography variant="body1" sx={{ fontStyle: "italic" }}>
+      <Typography variant="body1" sx={{ fontWeight: "medium" }}>
         {`${formatAuthorName(place.authorName)} - Visited: ${formatDate(place.dateVisited)}`}
       </Typography>
+      <Typography variant="body1">{place.review}</Typography>
       <Typography variant="body1" sx={{ fontWeight: "bold", mt: 3 }}>
         Issues
       </Typography>
