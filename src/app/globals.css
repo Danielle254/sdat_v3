@@ -28,6 +28,10 @@ body {
   border: 2px solid gray;
 }
 
+.autocomplete:focus {
+  border: 2x solid blue;
+}
+
 .listview {
   display: none;
   position: absolute;
