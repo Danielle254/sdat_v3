@@ -18,7 +18,14 @@ import DetailView from "../display/DetailView";
 import ListView from "../display/ListView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import { IconButton, Button, FormControl, Box, MenuItem } from "@mui/material";
+import {
+  IconButton,
+  Button,
+  FormControl,
+  Box,
+  MenuItem,
+  Tooltip,
+} from "@mui/material";
 import { FilterAltOutlined, FormatListBulleted } from "@mui/icons-material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import type { Filter } from "../../types/otherTypes";
@@ -139,27 +146,29 @@ export default function DisplayMap() {
               List View
             </Button>
           </Box>
-          <IconButton
-            onClick={centerMapUserLocation}
-            component="button"
-            size="large"
-            sx={{
-              position: "absolute",
-              bottom: "30px",
-              left: "70px",
-              zIndex: 4,
-              bgcolor: "#FFF",
-              borderRadius: "0",
-              "&:hover": {
+          <Tooltip title="My Location">
+            <IconButton
+              onClick={centerMapUserLocation}
+              component="button"
+              size="large"
+              sx={{
+                position: "absolute",
+                bottom: "30px",
+                left: "70px",
+                zIndex: 4,
                 bgcolor: "#FFF",
-                borderColor: "gray",
-                border: 1,
-                color: "#000",
-              },
-            }}
-          >
-            <MyLocationIcon />
-          </IconButton>
+                borderRadius: "0",
+                "&:hover": {
+                  bgcolor: "#FFF",
+                  borderColor: "gray",
+                  border: 1,
+                  color: "#000",
+                },
+              }}
+            >
+              <MyLocationIcon />
+            </IconButton>
+          </Tooltip>
           <ListView
             setModalOpen={setModalOpen}
             resolvePlace={setSelectedPlace}
