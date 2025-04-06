@@ -36,10 +36,10 @@ body {
   display: none;
   position: absolute;
   right: 10px;
-  top: 100px;
+  top: 110px;
   width: 300px;
   opacity: 0;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 200px);
   translate: 25vw 0;
   transition-property: display opacity;
   transition-duration: 0.3s;
