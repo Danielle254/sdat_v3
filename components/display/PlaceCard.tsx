@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Rating,
-  Chip,
-  Button,
-  Stack,
-  Icon,
-} from "@mui/material";
+import { Box, Typography, Rating, Chip, Card } from "@mui/material";
 import { Favorite, ThumbUp } from "@mui/icons-material";
 import cityState from "../../utils/cityState";
 
@@ -42,7 +34,7 @@ export default function PlaceCard({
 }: PlaceCardProps) {
   return (
     <>
-      <Box
+      <Card
         sx={{
           border: 1,
           borderColor: "lightgray",
@@ -51,7 +43,6 @@ export default function PlaceCard({
           gap: "1",
           p: 1,
           width: "1",
-          boxShadow: 1,
           cursor: "pointer",
         }}
         onClick={() => {
@@ -88,7 +79,7 @@ export default function PlaceCard({
             sx={{ maxWidth: "min-content", px: 1, mt: 1 }}
           />
         )}
-      </Box>
+      </Card>
     </>
   );
 }
