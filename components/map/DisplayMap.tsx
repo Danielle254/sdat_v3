@@ -18,16 +18,8 @@ import DetailView from "../display/DetailView";
 import ListView from "../display/ListView";
 import { MapContext } from "../../src/app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import {
-  IconButton,
-  Button,
-  FormControl,
-  Box,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
-import { FilterAltOutlined, FormatListBulleted } from "@mui/icons-material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { IconButton, Button, Box, MenuItem, TextField } from "@mui/material";
+import { FormatListBulleted } from "@mui/icons-material";
 import type { Filter } from "../../types/otherTypes";
 
 export default function DisplayMap() {
@@ -44,7 +36,7 @@ export default function DisplayMap() {
   const [listViewOpen, setListViewOpen] = useState(false);
   const [filter, setFilter] = useState<Filter>("all");
 
-  function handleFilter(event: SelectChangeEvent) {
+  function handleFilter(event: React.ChangeEvent<HTMLInputElement>) {
     setFilter(event.target.value as Filter);
   }
 
@@ -87,88 +79,78 @@ export default function DisplayMap() {
           fullscreenControlOptions={{ position: 6 }}
         >
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
+
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
+              alignItems: "end",
               position: "absolute",
-              top: "56px",
+              top: "60px",
               right: "12px",
               width: "294px",
             }}
           >
-            <FormControl
-              variant="standard"
-              size="small"
+            <TextField
+              select
+              id="filter"
+              label="Filter"
+              value={filter}
+              onChange={handleFilter}
+              variant="outlined"
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "flex-start",
-                gap: 1,
-                mr: 2,
+                width: "160px",
                 bgcolor: "lightgray",
-                borderRadius: "15px",
-                borderColor: "gray",
-                border: 1,
-                px: 1,
+                borderRadius: "5px",
               }}
+              title="filter"
+              size="small"
             >
-              <FilterAltOutlined fontSize="small" sx={{ mt: "2px" }} />
-              <Select
-                id="filter"
-                value={filter}
-                onChange={handleFilter}
-                labelId="filter-label"
-                sx={{ width: "110px" }}
-                disableUnderline
-              >
-                <MenuItem value={"all"}>All</MenuItem>
-                <MenuItem value={"myPlaces"}>My Places</MenuItem>
-                <MenuItem value={"favorites"}>Favorites</MenuItem>
-              </Select>
-            </FormControl>
+              <MenuItem value={"all"}>All</MenuItem>
+              <MenuItem value={"myPlaces"}>My Places</MenuItem>
+              <MenuItem value={"favorites"}>Favorites</MenuItem>
+            </TextField>
+
             <Button
               component="button"
+              variant="outlined"
               size="small"
               startIcon={<FormatListBulleted />}
               sx={{
-                borderRadius: "15px",
+                borderRadius: "5px",
                 bgcolor: "lightgray",
                 color: "#000",
                 fontSize: "12px",
-                borderColor: "gray",
-                border: 1,
-                px: 1,
+                p: 1,
               }}
               onClick={() => setListViewOpen(!listViewOpen)}
             >
               List View
             </Button>
           </Box>
-          <Tooltip title="My Location">
-            <IconButton
-              onClick={centerMapUserLocation}
-              component="button"
-              size="large"
-              sx={{
-                position: "absolute",
-                bottom: "30px",
-                left: "70px",
-                zIndex: 4,
+          <IconButton
+            onClick={centerMapUserLocation}
+            component="button"
+            size="large"
+            sx={{
+              position: "absolute",
+              bottom: "30px",
+              left: "70px",
+              zIndex: 4,
+              bgcolor: "#FFF",
+              borderRadius: "0",
+              "&:hover": {
                 bgcolor: "#FFF",
-                borderRadius: "0",
-                "&:hover": {
-                  bgcolor: "#FFF",
-                  borderColor: "gray",
-                  border: 1,
-                  color: "#000",
-                },
-              }}
-            >
-              <MyLocationIcon />
-            </IconButton>
-          </Tooltip>
+                borderColor: "gray",
+                border: 1,
+                color: "#000",
+              },
+            }}
+            title="My Location"
+          >
+            <MyLocationIcon />
+          </IconButton>
           <ListView
             setModalOpen={setModalOpen}
             resolvePlace={setSelectedPlace}
