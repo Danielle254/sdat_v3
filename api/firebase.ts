@@ -3,7 +3,6 @@ import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBOoYHBDanGsKV5PeIj4M18yxu-9KTF3Gs",
   authDomain: "service-dogs-around-town-v3.firebaseapp.com",
   projectId: "service-dogs-around-town-v3",
   storageBucket: "service-dogs-around-town-v3.firebasestorage.app",
