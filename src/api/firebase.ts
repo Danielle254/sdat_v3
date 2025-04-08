@@ -2,14 +2,16 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+const firebaseKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string;
+
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string,
-  authDomain: "service-dogs-around-town-v3.firebaseapp.com",
-  projectId: "service-dogs-around-town-v3",
-  storageBucket: "service-dogs-around-town-v3.firebasestorage.app",
-  messagingSenderId: "1043396959111",
-  appId: "1:1043396959111:web:e95dcaf460e5a5ce595122",
-  measurementId: "G-SMBZG9Q7T5",
+  apiKey: firebaseKey,
+  authDomain: "service-dogs-around-town-3f7b4.firebaseapp.com",
+  projectId: "service-dogs-around-town-3f7b4",
+  storageBucket: "service-dogs-around-town-3f7b4.firebasestorage.app",
+  messagingSenderId: "568576320730",
+  appId: "1:568576320730:web:fa98e8abee80ab0ad771e3",
+  measurementId: "G-CXB4GT673F",
 };
 
 const app = initializeApp(firebaseConfig);
