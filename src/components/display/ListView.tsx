@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Box, List, ListItem, Typography } from "@mui/material";
 
-import { MapContext } from "../../context";
+import { MapContext } from "../../app/context";
 import PlaceCard from "./PlaceCard";
-import type { Filter } from "../../../../types/otherTypes";
+import type { Filter } from "../../../types/otherTypes";
 
 type ListViewProps = {
   resolvePlace: React.Dispatch<

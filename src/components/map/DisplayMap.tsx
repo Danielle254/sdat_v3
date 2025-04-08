@@ -12,15 +12,15 @@ import {
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
 import NewPlace from "../form/NewPlace";
-import type { PlaceType } from "../../../../types/place";
+import type { PlaceType } from "../../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
 import DetailView from "../display/DetailView";
 import ListView from "../display/ListView";
-import { MapContext } from "../../context";
+import { MapContext } from "../../app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { IconButton, Button, Box, MenuItem, TextField } from "@mui/material";
 import { FormatListBulleted } from "@mui/icons-material";
-import type { Filter } from "../../../../types/otherTypes";
+import type { Filter } from "../../../types/otherTypes";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);

@@ -21,7 +21,7 @@ import {
   DashboardOutlined,
   TableBarOutlined,
 } from "@mui/icons-material";
-import { MapContext } from "../../context";
+import { MapContext } from "../../app/context";
 import formatAuthorName from "../../utils/formatAuthorName";
 import formatDate from "../../utils/formatDate";
 

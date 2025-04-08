@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Typography, Rating, Chip } from "@mui/material";
 import cityState from "../../utils/cityState";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { PlaceType } from "../../../../types/place";
+import { PlaceType } from "../../../types/place";
 
 type InfoWindowContentProps = {
   type: "newPlace" | "existingPlace";
