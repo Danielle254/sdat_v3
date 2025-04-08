@@ -2,10 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-const firebaseKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string;
-
 const firebaseConfig = {
-  apiKey: firebaseKey,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "service-dogs-around-town-3f7b4.firebaseapp.com",
   projectId: "service-dogs-around-town-3f7b4",
   storageBucket: "service-dogs-around-town-3f7b4.firebasestorage.app",
