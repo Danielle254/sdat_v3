@@ -3,7 +3,7 @@ import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: "AIzaSyCF7GtlK_ve-Npe2hZ1UwwzSJoxntpRKfU",
   authDomain: "service-dogs-around-town-3f7b4.firebaseapp.com",
   projectId: "service-dogs-around-town-3f7b4",
   storageBucket: "service-dogs-around-town-3f7b4.firebasestorage.app",
