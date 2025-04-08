@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Menu, ChevronRight } from "@mui/icons-material";
 import Image from "next/image";
-import logo from "../../public/logo.png";
+import logo from "../../../public/logo.png";
 import NavLinksList from "./NavLinksList";
 
 import Link from "next/link";
