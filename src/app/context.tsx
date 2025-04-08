@@ -4,7 +4,7 @@ import { createContext } from "react";
 import { useState, useEffect } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { onSnapshot, doc, setDoc, deleteDoc } from "firebase/firestore";
-import { auth, entriesCollection } from "../../api/firebase";
+import { auth, entriesCollection } from "./api/firebase";
 import type { PlaceType } from "../../types/place";
 
 type MapContextType = {

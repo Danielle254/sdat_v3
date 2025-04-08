@@ -11,10 +11,10 @@ import {
   Divider,
 } from "@mui/material";
 import { FavoriteBorder, Favorite, Visibility } from "@mui/icons-material";
-import type { PlaceType } from "../../types/place";
+import type { PlaceType } from "../../../../types/place";
 import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
-import { MapContext } from "../../src/app/context";
+import { MapContext } from "../../context";
 
 interface NewPlaceFormProps {
   name: string | undefined;

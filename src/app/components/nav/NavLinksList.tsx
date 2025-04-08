@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Google, Pets, Home, Gavel } from "@mui/icons-material";
 import { useContext } from "react";
-import { MapContext } from "../../src/app/context";
+import { MapContext } from "../../context";
 
 export default function NavLinksList() {
   const { isLoggedIn, googleLogin, handleLogout } = useContext(MapContext);

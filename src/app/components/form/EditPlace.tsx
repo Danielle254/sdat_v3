@@ -11,7 +11,7 @@ import {
   Rating,
 } from "@mui/material";
 import { Favorite, Visibility, FavoriteBorder } from "@mui/icons-material";
-import { MapContext } from "../../src/app/context";
+import { MapContext } from "../../context";
 
 type EditPlaceType = {
   placeId: string;
