@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Rating, Chip, Card } from "@mui/material";
 import { Favorite, ThumbUp } from "@mui/icons-material";
-import cityState from "../../utils/cityState";
+import cityState from "../../../utils/cityState";
 
 type PlaceCardProps = {
   name: string;

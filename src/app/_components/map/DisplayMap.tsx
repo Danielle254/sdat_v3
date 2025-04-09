@@ -11,11 +11,11 @@ import {
 } from "@vis.gl/react-google-maps";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
-import NewPlace from "../form/NewPlace";
+import NewPlace from "../../app/_components/form/NewPlace";
 import type { PlaceType } from "../../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
-import DetailView from "../display/DetailView";
-import ListView from "../display/ListView";
+import DetailView from "../../app/_components/display/DetailView";
+import ListView from "../../app/_components/display/ListView";
 import { MapContext } from "../../app/context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { IconButton, Button, Box, MenuItem, TextField } from "@mui/material";
