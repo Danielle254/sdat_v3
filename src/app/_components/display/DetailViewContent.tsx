@@ -7,7 +7,6 @@ import {
   List,
   ListItem,
   Button,
-  Box,
 } from "@mui/material";
 import {
   Favorite,

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Box, List, ListItem, Typography } from "@mui/material";
-
 import { MapContext } from "../../context";
 import PlaceCard from "./PlaceCard";
 import type { Filter } from "../../../../types/otherTypes";

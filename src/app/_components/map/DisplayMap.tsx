@@ -11,16 +11,16 @@ import {
 } from "@vis.gl/react-google-maps";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 import MapHandler from "./MapHandler";
-import NewPlace from "../../app/_components/form/NewPlace";
-import type { PlaceType } from "../../../types/place";
+import NewPlace from "../form/NewPlace";
+import type { PlaceType } from "../../../../types/place";
 import InfoWindowContent from "./InfoWindowContent";
-import DetailView from "../../app/_components/display/DetailView";
-import ListView from "../../app/_components/display/ListView";
-import { MapContext } from "../../app/context";
+import DetailView from "../display/DetailView";
+import ListView from "../display/ListView";
+import { MapContext } from "../../context";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { IconButton, Button, Box, MenuItem, TextField } from "@mui/material";
 import { FormatListBulleted } from "@mui/icons-material";
-import type { Filter } from "../../../types/otherTypes";
+import type { Filter } from "../../../../types/otherTypes";
 
 export default function DisplayMap() {
   const [zoom, setZoom] = useState(4);
