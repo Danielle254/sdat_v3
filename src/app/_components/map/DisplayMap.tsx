@@ -78,8 +78,29 @@ export default function DisplayMap() {
           }}
           fullscreenControlOptions={{ position: 6 }}
         >
+          <IconButton
+            onClick={centerMapUserLocation}
+            component="button"
+            size="large"
+            sx={{
+              position: "absolute",
+              bottom: "30px",
+              left: "70px",
+              zIndex: 4,
+              bgcolor: "#FFF",
+              borderRadius: "0",
+              "&:hover": {
+                bgcolor: "#FFF",
+                borderColor: "gray",
+                border: 1,
+                color: "#000",
+              },
+            }}
+            title="My Location"
+          >
+            <MyLocationIcon />
+          </IconButton>
           <PlacesAutocomplete onPlaceSelect={setSelectedPlace} />
-
           <Box
             sx={{
               display: "flex",
@@ -111,7 +132,6 @@ export default function DisplayMap() {
               <MenuItem value={"myPlaces"}>My Places</MenuItem>
               <MenuItem value={"favorites"}>Favorites</MenuItem>
             </TextField>
-
             <Button
               component="button"
               variant="outlined"
@@ -129,28 +149,6 @@ export default function DisplayMap() {
               List View
             </Button>
           </Box>
-          <IconButton
-            onClick={centerMapUserLocation}
-            component="button"
-            size="large"
-            sx={{
-              position: "absolute",
-              bottom: "30px",
-              left: "70px",
-              zIndex: 4,
-              bgcolor: "#FFF",
-              borderRadius: "0",
-              "&:hover": {
-                bgcolor: "#FFF",
-                borderColor: "gray",
-                border: 1,
-                color: "#000",
-              },
-            }}
-            title="My Location"
-          >
-            <MyLocationIcon />
-          </IconButton>
           <ListView
             setModalOpen={setModalOpen}
             resolvePlace={setSelectedPlace}
