@@ -56,6 +56,13 @@ body {
   }
 }
 
+.card-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
 @media screen and (max-width: 350px) {
   .autocomplete {
     width: 90%;

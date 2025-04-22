@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Rating, Chip, Card } from "@mui/material";
+import { Box, Typography, Rating, Chip, Card, Button } from "@mui/material";
 import { Favorite, ThumbUp } from "@mui/icons-material";
 import cityState from "../../../utils/cityState";
 
@@ -43,12 +43,9 @@ export default function PlaceCard({
           gap: "1",
           p: 1,
           width: "1",
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          setModalOpen(true);
-          resolvePlace(null);
-          setMarker(id);
+          "&:hover": {
+            border: "1px darkgray solid",
+          },
         }}
       >
         <Box
@@ -59,9 +56,24 @@ export default function PlaceCard({
             flexWrap: "nowrap",
           }}
         >
-          <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-            {name}
-          </Typography>
+          <button
+            onClick={() => {
+              setModalOpen(true);
+              resolvePlace(null);
+              setMarker(id);
+            }}
+            style={{
+              border: "none",
+              backgroundColor: "inherit",
+              padding: 0,
+              cursor: "pointer",
+            }}
+            className="card-button"
+          >
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+              {name}
+            </Typography>
+          </button>
           {userId === author && isFavorite && (
             <Favorite color="error" fontSize="small" />
           )}
