@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Google, Pets, Home, Gavel, Keyboard } from "@mui/icons-material";
+import { Google, Info, Map, Gavel, Keyboard } from "@mui/icons-material";
 import { useContext } from "react";
 import { MapContext } from "../app/context";
 
@@ -36,7 +36,7 @@ export default function NavLinksList() {
         <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton href="/">
             <ListItemIcon>
-              <Home />
+              <Map />
             </ListItemIcon>
             <ListItemText primary="Home" sx={{ ml: -1 }} />
           </ListItemButton>
@@ -44,7 +44,7 @@ export default function NavLinksList() {
         <ListItem disablePadding sx={{ ml: 1 }}>
           <ListItemButton href="/info" component="a">
             <ListItemIcon>
-              <Pets />
+              <Info />
             </ListItemIcon>
             <ListItemText primary="About this App" sx={{ ml: -1 }} />
           </ListItemButton>
