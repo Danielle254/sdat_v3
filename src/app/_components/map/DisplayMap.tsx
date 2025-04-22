@@ -60,7 +60,7 @@ export default function DisplayMap() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>
-      <div className="map-container">
+      <main className="map-container">
         <Map
           zoom={zoom}
           center={position}
@@ -255,7 +255,7 @@ export default function DisplayMap() {
           )}
         </Map>
         {selectedPlace && <MapHandler place={selectedPlace} marker={marker} />}
-      </div>
+      </main>
       {selectedPlace && (
         <NewPlace
           modalOpen={modalOpen}
