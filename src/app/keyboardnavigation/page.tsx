@@ -17,6 +17,7 @@ import {
 export default function Info() {
   return (
     <>
+      <title>Keyboard Navigation</title>
       <NavBar />
       <main>
         <Box

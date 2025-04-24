@@ -10,6 +10,7 @@ import Footer from "./_components/footer";
 export default function Info() {
   return (
     <>
+      <title>Info - Service Dogs Around Town</title>
       <NavBar />
       <main>
         <Box

@@ -4,8 +4,7 @@ import "./globals.css";
 import { MapContextProvider } from "./context";
 
 export const metadata: Metadata = {
-  title: "Service Dogs Around Town",
-  description: "project by Danielle Lindblom",
+  title: "Map - Service Dogs Around Town",
 };
 
 export default function RootLayout({
