@@ -1,6 +1,6 @@
 "use client";
 
-import DisplayMap from "./_components/map/DisplayMap";
+import DisplayMap from "./components/map/DisplayMap";
 import NavBar from "../components/NavBar";
 
 export default function Home() {

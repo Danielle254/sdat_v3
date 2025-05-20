@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import Image from "next/image";
 import serviceDogImage from "../../../public/servicedog.png";
-import Footer from "./_components/footer";
+import Footer from "./components/footer";
 
 export default function Info() {
   return (

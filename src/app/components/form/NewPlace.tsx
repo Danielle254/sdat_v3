@@ -10,7 +10,12 @@ import {
   FormGroup,
   Divider,
 } from "@mui/material";
-import { FavoriteBorder, Favorite, Visibility } from "@mui/icons-material";
+import {
+  FavoriteBorder,
+  Favorite,
+  Visibility,
+  Google,
+} from "@mui/icons-material";
 import type { PlaceType } from "../../../../types/place";
 import ModalBox from "../display/ModalBox";
 import { v4 as uuidv4 } from "uuid";
@@ -32,7 +37,8 @@ export default function NewPlaceForm({
   handleCloseModal,
 }: NewPlaceFormProps) {
   const today = new Date().toJSON().slice(0, 10);
-  const { userId, userName, isLoggedIn, addPlace } = useContext(MapContext);
+  const { userId, userName, isLoggedIn, addPlace, googleLogin } =
+    useContext(MapContext);
   let initialPlace: PlaceType = {
     name: name,
     address: address,
@@ -86,9 +92,22 @@ export default function NewPlaceForm({
       <>
         <ModalBox modalOpen={modalOpen} handleCloseModal={handleCloseModal}>
           <Typography variant="body1">
-            You must be logged in to write a review. Please use the menu in the
-            upper right corner to log in with Google.
+            You must be logged in to write a review.
           </Typography>
+          <Button
+            onClick={googleLogin}
+            component="button"
+            variant="contained"
+            color="info"
+            startIcon={<Google />}
+            sx={{
+              mt: 2,
+              borderRadius: "20px",
+              px: 2,
+            }}
+          >
+            Login
+          </Button>
         </ModalBox>
       </>
     );
