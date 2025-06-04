@@ -61,7 +61,7 @@ export default function NavBar() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="open menu"
             sx={{ mr: 2 }}
             onClick={toggleDrawer(true)}
           >
@@ -72,7 +72,7 @@ export default function NavBar() {
               <IconButton
                 size="large"
                 color="inherit"
-                aria-label="menu"
+                aria-label="close menu"
                 onClick={toggleDrawer(false)}
                 sx={{
                   display: "flex",
