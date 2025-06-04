@@ -54,7 +54,7 @@ export default function DetailViewContent({
           {place.name}
         </Typography>
         {userId === place.author && place.isFavorite && (
-          <Favorite color="error" />
+          <Favorite color="error" aria-hidden="false" aria-label="favorite" />
         )}
       </Stack>
       <Typography variant="body1" gutterBottom>

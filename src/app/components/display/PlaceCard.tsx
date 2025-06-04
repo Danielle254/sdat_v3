@@ -75,7 +75,12 @@ export default function PlaceCard({
             </Typography>
           </button>
           {userId === author && isFavorite && (
-            <Favorite color="error" fontSize="small" />
+            <Favorite
+              color="error"
+              fontSize="small"
+              aria-hidden="false"
+              aria-label="favorite"
+            />
           )}
         </Box>
         <Typography variant="body2" gutterBottom={true}>
