@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import NavBar from "../../components/NavBar";
 import {
@@ -13,11 +11,15 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import type { Metadata } from "next";
 
-export default function Info() {
+export const metadata: Metadata = {
+  title: "Keyboard Navigation",
+};
+
+export default function KeyboardNavigation() {
   return (
     <>
-      <title>Keyboard Navigation</title>
       <NavBar />
       <main>
         <Box

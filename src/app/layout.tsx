@@ -4,7 +4,10 @@ import "./globals.css";
 import { MapContextProvider } from "./context";
 
 export const metadata: Metadata = {
-  title: "Map - Service Dogs Around Town",
+  title: {
+    template: "%s  |  Service Dogs Around Town",
+    default: "Service Dogs Around Town",
+  },
 };
 
 export default function RootLayout({

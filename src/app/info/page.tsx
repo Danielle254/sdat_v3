@@ -1,16 +1,18 @@
-"use client";
-
 import React from "react";
 import NavBar from "../../components/NavBar";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import Image from "next/image";
 import serviceDogImage from "../../../public/servicedog.png";
 import Footer from "./components/footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Info",
+};
 
 export default function Info() {
   return (
     <>
-      <title>Info - Service Dogs Around Town</title>
       <NavBar />
       <main>
         <Box
