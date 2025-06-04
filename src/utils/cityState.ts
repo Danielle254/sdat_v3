@@ -1,3 +1,3 @@
 export default function cityState(str: string): string {
-  return str.slice(str.indexOf(",") + 2, str.length - 10);
+  return str.slice(str.indexOf(",") + 2, str.length - 11);
 }
