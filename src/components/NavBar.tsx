@@ -47,10 +47,10 @@ export default function NavBar() {
               alt=""
               width={30}
               style={{ marginRight: "5px" }}
+              data-testid="logo"
             />
             <Typography
               variant="h1"
-              component="div"
               sx={{ flexGrow: 1 }}
               fontSize="h5.fontSize"
             >
@@ -61,7 +61,7 @@ export default function NavBar() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="open menu"
             sx={{ mr: 2 }}
             onClick={toggleDrawer(true)}
           >
@@ -72,7 +72,7 @@ export default function NavBar() {
               <IconButton
                 size="large"
                 color="inherit"
-                aria-label="menu"
+                aria-label="close menu"
                 onClick={toggleDrawer(false)}
                 sx={{
                   display: "flex",
