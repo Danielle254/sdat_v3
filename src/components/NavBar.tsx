@@ -47,6 +47,7 @@ export default function NavBar() {
               alt=""
               width={30}
               style={{ marginRight: "5px" }}
+              data-testid="logo"
             />
             <Typography
               variant="h1"
