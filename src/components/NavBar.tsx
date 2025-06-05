@@ -50,7 +50,6 @@ export default function NavBar() {
             />
             <Typography
               variant="h1"
-              component="div"
               sx={{ flexGrow: 1 }}
               fontSize="h5.fontSize"
             >
