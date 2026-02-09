@@ -1,4 +1,4 @@
-# Service Dogs Around Town
+# Service Dogs Around Town 🐕‍🦺
 A web application that allows service dog handlers (persons with disabilities) to better navigate their local communities by providing peer-created reviews of local businesses as it relates to the comfort and safety of their service animals.
 <img width="1101" height="686" alt="screenshot of Service Dogs Around Town on desktop" src="https://github.com/user-attachments/assets/7b85cdfe-6b6d-467c-aeb4-e0835efde273" />
 
@@ -6,7 +6,7 @@ A web application that allows service dog handlers (persons with disabilities) t
 [Visit the Live version of Website](https://servicedogsaroundtown.vercel.app/)  
 Responsive for all size devices. 
 
-## Technology
+## Technology 💻
 
 * Next.js
 * React.js
@@ -18,7 +18,7 @@ Responsive for all size devices.
 * User Authentication: Firebase - Google Login
 * Deployment: Vercel
 
-## Origin
+## Origin 🪄
 
 This is a personal project created by Danielle Lindblom as part of her portfolio.
 The idea for this project came from a personal need - not being able to remember which restaurants were set up well and had been a good experience when utilizing her service dog.
@@ -43,7 +43,7 @@ ___
 Built with React.js, JavaScript, and Tailwind CSS, this version incorporated the Google Maps API and Firebase.
 ___
 
-## Key Features
+## Key Features 🌟
 
 * Login with Google (Firebase API)
 * Search for a business using Google Places Autocomplete API
@@ -54,7 +54,7 @@ ___
 * Filter places -- map markers and list view -- by your favorites
 * Navigate to the ADA.gov website for information on federal service dog laws
 
-## Setup - Run this project locally
+## Setup - Run this project locally 👩‍💻
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -136,15 +136,16 @@ There are a few unit tests set up. These can be run by using:
 npm test
 ```
 
-## Future Enhancements
+## Future Enhancements 👏
 
 I have lots of ideas to make the user experience even better. I'd like to add the functionality where the list of places on the sidebar matches what is shown on the map and adjusts itself based on the map window changing, just like Google Maps does.  
 
 Another big item on the To Do list is to allow multiple users to rate and review the same business location.  
 
-## Contact
+## Contact 💬
 
 Danielle Lindblom  
 Portfolio: [https://daniellelindblom.com](https://daniellelindblom.com)  
 LinkedIn: [https://www.linkedin.com/in/danielle-lindblom/](https://www.linkedin.com/in/danielle-lindblom/)  
 
+I am actively seeking service dog handlers to do user testing and provide feedback. Please reach out if you are interested!
