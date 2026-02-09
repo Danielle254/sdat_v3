@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Service Dogs Around Town
+A web application that allows service dog handlers (persons with disabilities) to better navigate their local communities by providing peer-created reviews of local businesses as it relates to the comfort and safety of their service animals.
+<img width="1101" height="686" alt="screenshot of Service Dogs Around Town on desktop" src="https://github.com/user-attachments/assets/7b85cdfe-6b6d-467c-aeb4-e0835efde273" />
 
-## Getting Started
 
-First, run the development server:
+[Visit the Live version of Website](https://servicedogsaroundtown.vercel.app/)  
+Responsive for all size devices. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technology
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Next.js
+* React.js
+* TypeScript
+* UI: Material UI, Tailwind CSS
+* Unit Testing: Jest, React Testing Library
+* API: Google Maps, Google Places Autocomplete
+* Database: Firebase
+* User Authentication: Firebase - Google Login
+* Deployment: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Origin
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is a personal project created by Danielle Lindblom as part of her portfolio.
+The idea for this project came from a personal need - not being able to remember which restaurants were set up well and had been a good experience when utilizing her service dog.
 
-## Learn More
+Service Dogs Around Town has been built over 3 separate iterations with improvements to tech stack and user experience each time.
 
-To learn more about Next.js, take a look at the following resources:
+**Version 1**  
+[Live Link](https://danielle254.github.io/ServiceDogsAroundTown_v1/)  
+[Repo](https://github.com/Danielle254/ServiceDogsAroundTown_v1)  
+<img width="1054" height="641" alt="" src="https://github.com/user-attachments/assets/373a8ee6-d1cb-4c2b-9b25-923d5d78cacf" />  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Built with React.js, JavaScript, Vanilla CSS, and utilizing Local Browser Storage, this was mainly a prototype and provided proof of concept.
+___
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Version 2**  
+[Live Link](https://servicedogsaroundtownv2.vercel.app/)  
+[Repo](https://github.com/Danielle254/ServiceDogsAroundTown_v2)  
+<img width="1055" height="643" alt="sdatscreen1" src="https://github.com/user-attachments/assets/24d3ad9c-00e6-4c1f-96a2-e6feb2df3490" />  
 
-## Deploy on Vercel
+Built with React.js, JavaScript, and Tailwind CSS, this version incorporated the Google Maps API and Firebase.
+___
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Login with Google (Firebase API)
+* Search for a business using Google Places Autocomplete API
+* Rate, review, and save private and public notes about that business with a custom form
+* See all existing businesses that have been rated in the library
+* Read about the app on the About page
+* Filter to see just your own entries
+* Filter places -- map markers and list view -- by your favorites
+* Navigate to the ADA.gov website for information on federal service dog laws
+
+## Setup - Run this project locally
+
+
+## Future Enhancements
+
+I have lots of ideas to make the user experience even better. I'd like to add the functionality where the list of places on the sidebar matches what is shown on the map and adjusts itself based on the map window changing, just like Google Maps does.  
+
+Another big item on the To Do list is to allow multiple users to rate and review the same business location.  
+
+## Contact
+
+Danielle Lindblom  
+Portfolio: [https://daniellelindblom.com](https://daniellelindblom.com)  
+LinkedIn: [https://www.linkedin.com/in/danielle-lindblom/](https://www.linkedin.com/in/danielle-lindblom/)  
+
